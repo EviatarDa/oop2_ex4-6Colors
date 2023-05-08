@@ -21,8 +21,8 @@ enum class Colors
 
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
-const int ROW = 5;
-const int COL = 5;
+const int ROW = 11;
+const int COL = 11;
 
 class Resources
 {
