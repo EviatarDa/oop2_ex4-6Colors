@@ -21,11 +21,8 @@ void Board::createBoard()
 
 void Board::drawGame(sf::RenderWindow& window)
 {
-	for (int row = 0; row < m_row; row++)
+	for (int row = 0; row < m_row * m_col; row++)
 	{
-		for (int col = 0; col < m_col; col++)
-		{
-			window.draw(m_hexagons[row * col].get());
-		}
+		window.draw(m_hexagons[row].get());
 	}
 }
