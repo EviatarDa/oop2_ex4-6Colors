@@ -68,6 +68,5 @@ void Board::drawBoard(sf::RenderWindow& window)
 	{
 		window.draw(m_rectangles[rectangle]);
 	}
-	window.draw(m_X->getLine1());
-	window.draw(m_X->getLine2());
+	window.draw(m_X->get());
 }
