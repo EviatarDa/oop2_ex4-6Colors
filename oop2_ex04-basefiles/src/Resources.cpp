@@ -12,3 +12,8 @@ Resources& Resources::instance()
 	static Resources Resource;
 	return Resource;
 }
+
+sf::Color* Resources::getColorArray()
+{
+	return m_colorArray;
+}

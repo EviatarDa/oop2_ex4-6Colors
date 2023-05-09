@@ -53,7 +53,7 @@ void Game::startGame()
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 102, 105));
-        m_board.drawGame(this->m_window);
+        m_board.drawBoard(this->m_window);
         m_window.display();
 
         for (auto event = sf::Event{}; m_window.waitEvent(event); )
