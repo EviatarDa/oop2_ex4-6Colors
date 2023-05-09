@@ -8,7 +8,8 @@ Board::Board(int row, int col)
 	createBoard();
 	createRectangles();
 
-	m_X = std::make_unique<X>(m_rectangles[2].getPosition());
+	m_PlayerX = std::make_unique<X>(m_rectangles[2].getPosition());
+	m_ComputerX = std::make_unique<X>(m_rectangles[0].getPosition());
 }
 
 void Board::createBoard()
@@ -45,18 +46,6 @@ sf::RectangleShape Board::createRectangle(const int index) const
 	return rec;
 }
 
-sf::VertexArray Board::createX(sf::RectangleShape rectangle)
-{
-	//sf::RectangleShape x[2];
-	sf::VertexArray x;
-	//x[0] = (sf::Vector2f(150, 5));
-	//line1.rotate(45);
-
-	//sf::RectangleShape line2(sf::Vector2f(150, 5));
-	//line1.rotate(45);
-
-	return x;
-}
 
 void Board::drawBoard(sf::RenderWindow& window)
 {
@@ -68,5 +57,16 @@ void Board::drawBoard(sf::RenderWindow& window)
 	{
 		window.draw(m_rectangles[rectangle]);
 	}
-	window.draw(m_X->get());
+	window.draw(m_PlayerX->get());
+	window.draw(m_ComputerX->get());
+}
+
+void Board::setPlayerX(Colors color)
+{
+	m_PlayerX = std::make_unique<X>(m_rectangles[color].getPosition());
+}
+
+sf::RectangleShape Board::getRectangle(Colors color)
+{
+	return m_rectangles[color];
 }

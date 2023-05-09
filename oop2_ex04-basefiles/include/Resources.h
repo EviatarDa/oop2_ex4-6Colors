@@ -5,7 +5,7 @@
 #include <string.h>
 
 
-enum class Colors
+enum Colors
 {
     Cyan,
     Blue,

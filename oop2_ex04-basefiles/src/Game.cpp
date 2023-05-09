@@ -48,6 +48,17 @@ void Game::run()
     }
 }
 
+void Game::handleGameClick(sf::Vector2f locaion)
+{
+    for(int color = Cyan ; color <= Orange ; color++)
+    {
+        if (m_board.getRectangle((Colors)color).getGlobalBounds().contains(locaion))
+        {
+            m_board.setPlayerX((Colors)color);
+        }
+    }
+}
+
 void Game::startGame()
 {
     while (m_window.isOpen())
@@ -60,6 +71,15 @@ void Game::startGame()
         {
             switch (event.type)
             {
+            case sf::Event::MouseButtonReleased:
+            {
+                auto location = m_window.mapPixelToCoords(
+                    { event.mouseButton.x, event.mouseButton.y });
+                handleGameClick(location);
+                startGame();
+                break;
+            }
+
             case sf::Event::Closed:
                 m_window.close();
                 break;

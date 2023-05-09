@@ -11,6 +11,7 @@ class Game
 public:
 	Game();
 	void run();
+	void handleGameClick(sf::Vector2f);
 
 private:
 	sf::RenderWindow m_window;

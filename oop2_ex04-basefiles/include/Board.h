@@ -9,7 +9,8 @@ class Board
 public:
 	Board(int, int);
 	void drawBoard(sf::RenderWindow&);
-
+	void setPlayerX(Colors);
+	sf::RectangleShape getRectangle(Colors);
 	
 
 private:
@@ -17,11 +18,11 @@ private:
 	std::vector<sf::RectangleShape> m_rectangles;
 	int m_row;
 	int m_col;
-	std::unique_ptr<X> m_X;
+	std::unique_ptr<X> m_PlayerX;
+	std::unique_ptr<X> m_ComputerX;
 
 	void createBoard();
 	void createRectangles();
 	sf::RectangleShape createRectangle(const int) const;
-	sf::VertexArray createX(sf::RectangleShape);
 
 };
