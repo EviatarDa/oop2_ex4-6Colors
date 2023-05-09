@@ -12,6 +12,7 @@ enum class Colors
     Green,
     Red,
     Yellow,
+    Orange,
 };
 
 const int WINDOW_HEIGHT = 800;
@@ -32,6 +33,6 @@ public:
 
 
 private:
-    sf::Color m_colorArray[5] = { sf::Color::Cyan, sf::Color::Blue, sf::Color::Green,
-        sf::Color::Red, sf::Color::Yellow };
+    sf::Color m_colorArray[6] = { sf::Color::Cyan, sf::Color::Blue, sf::Color::Green,
+        sf::Color::Red, sf::Color::Yellow, sf::Color::Color(255, 119, 0) };
 };

@@ -7,6 +7,8 @@ Board::Board(int row, int col)
 {
 	createBoard();
 	createRectangles();
+
+	m_X = std::make_unique<X>(m_rectangles[2].getPosition());
 }
 
 void Board::createBoard()
@@ -22,7 +24,7 @@ void Board::createBoard()
 
 void Board::createRectangles()
 {
-	for (int rectangle = 0; rectangle < 5; ++rectangle)
+	for (int rectangle = 0; rectangle < 6; ++rectangle)
 	{
 		m_rectangles.push_back(createRectangle(rectangle));
 	}
@@ -34,13 +36,26 @@ sf::RectangleShape Board::createRectangle(const int index) const
 
 	//Position
 	rec.setSize(sf::Vector2f(50.f, 50.f));
-	rec.setPosition(WINDOW_WIDTH * 0.5-250 + index*100, WINDOW_HEIGHT * 0.9);
+	rec.setPosition(WINDOW_WIDTH * 0.5-300 + index*100, WINDOW_HEIGHT * 0.9);
 
 	//Style
 	rec.setOutlineThickness(2.f);
 	rec.setFillColor(Resources::instance().getColorArray()[index]);
 
 	return rec;
+}
+
+sf::VertexArray Board::createX(sf::RectangleShape rectangle)
+{
+	//sf::RectangleShape x[2];
+	sf::VertexArray x;
+	//x[0] = (sf::Vector2f(150, 5));
+	//line1.rotate(45);
+
+	//sf::RectangleShape line2(sf::Vector2f(150, 5));
+	//line1.rotate(45);
+
+	return x;
 }
 
 void Board::drawBoard(sf::RenderWindow& window)
@@ -53,5 +68,6 @@ void Board::drawBoard(sf::RenderWindow& window)
 	{
 		window.draw(m_rectangles[rectangle]);
 	}
-
+	window.draw(m_X->getLine1());
+	window.draw(m_X->getLine2());
 }
