@@ -76,7 +76,7 @@ void Game::startGame()
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 handleGameClick(location);
-                startGame();
+                //startGame();
                 break;
             }
 
@@ -86,9 +86,9 @@ void Game::startGame()
             }
         }
 
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        //{
-        //    m_window.close();
-        //}
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            m_window.close();
+        }
     }
 }

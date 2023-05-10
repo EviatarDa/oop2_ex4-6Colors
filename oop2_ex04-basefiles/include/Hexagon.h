@@ -9,8 +9,11 @@ class Hexagon
 public:
 	Hexagon(int, int);
 	sf::CircleShape get();
+	void setOwner(Owner);
 
 private:
 	sf::CircleShape m_hexagon;
 	sf::Color m_color;
+
+	Owner m_owner;
 };

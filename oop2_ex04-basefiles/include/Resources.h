@@ -20,6 +20,13 @@ enum Textures
     X_texture,
 };
 
+enum Owner
+{
+    Player,
+    Computer,
+    None,
+};
+
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 const int ROW = 70; //шезб

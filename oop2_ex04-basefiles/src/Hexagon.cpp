@@ -4,7 +4,7 @@
 
 
 Hexagon::Hexagon(int row, int col)
-	:m_hexagon(RADIUS,6)
+	:m_hexagon(RADIUS,6), m_owner(None)
 {
 	std::random_device rd;                       // Obtain a random seed from the hardware
 	std::mt19937 generator(rd());                 // Initialize the random number generator
@@ -27,4 +27,9 @@ sf::CircleShape Hexagon::get()
 {
 	return m_hexagon;
 
+}
+
+void Hexagon::setOwner(Owner owner)
+{
+	m_owner = owner;
 }
