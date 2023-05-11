@@ -30,7 +30,7 @@ enum Owner
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 
-const int ROW = 30; //גובה (מספר שורה)
+const int ROW = 31; //גובה (מספר שורה)
 const int COL = 54; //רוחב מספר עמודה
 const int RADIUS = 15;
 

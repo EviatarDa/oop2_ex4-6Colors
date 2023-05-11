@@ -3,7 +3,7 @@
 #include "Board.h"
 
 Board::Board(int row, int col)
-	:m_row(row), m_col(col)
+	:m_row(row), m_col(col), m_graph(row* col)
 {
 	createBoard();
 	connectNeighbors();
@@ -38,26 +38,38 @@ void Board::createRectangles()
 
 void Board::connectNeighbors()
 {
-	int directions[6][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, 1} };
+	int even_directions[6][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, 1} };
+	int odd_directions[6][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, -1} };
 
 	for (int index = 0; index < m_hexagons.size(); ++index) 
 	{
-		if (index == 3 * 54)
-		{
-			int num = 1 + 2;
-		}
 		Hexagon& hexagon = m_hexagons[index];
 		int row = hexagon.getRow();
 		int col = hexagon.getCol();
 
-		for (const auto& dir : directions) 
+		if (row % 2 == 0)
 		{
-			int newRow = row + dir[0];
-			int newCol = col + dir[1];
+			connectHexagonNeighbors(even_directions, row, col, hexagon);
+		}
+		else
+		{
+			connectHexagonNeighbors(odd_directions, row, col, hexagon);
+		}
+	}
+}
 
-			if (newRow >= 0 && newRow < m_row && newCol >= 0 && newCol < m_col) 
+void Board::connectHexagonNeighbors(int dir[6][2], int row, int col, Hexagon& hexagon)
+{
+	for (int index = 0 ; index < 6 ; index++)
+	{
+		int newRow = row + dir[index][0];
+		int newCol = col + dir[index][1];
+
+		if (newRow >= 0 && newRow < m_row && newCol >= 0 && newCol < m_col) 
+		{
+			int neighborIndex = newRow * m_col + newCol;
+			if(hexagon.getColor() == m_hexagons[neighborIndex].getColor())
 			{
-				int neighborIndex = newRow * m_col + newCol;
 				hexagon.addNeighbor(&m_hexagons[neighborIndex]);
 			}
 		}
@@ -70,7 +82,7 @@ sf::RectangleShape Board::createRectangle(const int index) const
 
 	//Position
 	rec.setSize(sf::Vector2f(50.f, 50.f));
-	rec.setPosition(WINDOW_WIDTH * 0.5-300 + index*100, WINDOW_HEIGHT * 0.9);
+	rec.setPosition(WINDOW_WIDTH * 0.5 - 300 + index * 100, WINDOW_HEIGHT * 0.9);
 
 	//Style
 	rec.setOutlineThickness(2.f);
@@ -106,7 +118,7 @@ sf::RectangleShape Board::getRectangle(Colors color)
 
 void Board::Check()
 {
-	static int index = 3*54;
+	static int index =0;
 
 	//m_hexagons[index].get().setFillColor(sf::Color::Black);
 	Hexagon& hex = m_hexagons[index];
