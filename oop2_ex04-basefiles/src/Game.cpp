@@ -67,7 +67,7 @@ void Game::startGame()
         m_board.drawBoard(this->m_window);
         m_window.display();
 
-        for (auto event = sf::Event{}; m_window.waitEvent(event); )
+        if (auto event = sf::Event{}; m_window.waitEvent(event) )
         {
             switch (event.type)
             {
