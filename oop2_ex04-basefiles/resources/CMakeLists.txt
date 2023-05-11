@@ -1,4 +1,6 @@
 ﻿configure_file ("X.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Background.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
-
+configure_file ("Medium.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Hard.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("Easy.png" ${CMAKE_BINARY_DIR} COPYONLY)
