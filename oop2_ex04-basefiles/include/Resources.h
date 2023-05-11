@@ -18,6 +18,7 @@ enum Colors
 enum Textures
 {
     X_texture,
+    Background,
 };
 
 enum Owner
@@ -25,6 +26,13 @@ enum Owner
     Player,
     Computer,
     None,
+};
+
+enum Button
+{
+    Eazy,
+    Medium,
+    Hard,
 };
 
 const int WINDOW_HEIGHT = 800;
@@ -38,7 +46,8 @@ const float HEX_WIDTH = RADIUS * std::sqrt(3.f);
 const float HEX_HEIGHT = 2.f * RADIUS;
 
 const int OUTLINE = 2;
-const int TEXTURES = 1;
+const int TEXTURES = 2;
+const int BUTTONS = 3;
 
 class Resources
 {
@@ -49,6 +58,7 @@ public:
 
     sf::Color* getColorArray();
     sf::Texture& getTexture(Textures);
+    sf::Texture& getButton(Button);
 
 
 private:
@@ -56,5 +66,8 @@ private:
         sf::Color::Red, sf::Color::Yellow, sf::Color::Color(255, 119, 0) };
 
     sf::Texture m_textures[TEXTURES];
+    sf::Texture m_Buttons[BUTTONS];
+
+    void LoadFromFile();
 
 };

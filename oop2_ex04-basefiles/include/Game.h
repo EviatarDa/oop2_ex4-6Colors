@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include "Resources.h"
 #include "Board.h"
+#include "Menu.h"
 
 
 class Game
@@ -16,7 +17,7 @@ public:
 private:
 	sf::RenderWindow m_window;
 	Resources& m_resource = Resources::instance();
-	//Menu m_menu;
+	Menu m_menu;
 	Board m_board;
 
 	void startGame();

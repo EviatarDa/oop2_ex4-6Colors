@@ -13,7 +13,7 @@ void Game::run()
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 0, 0));
-        //DrawMenu();
+        m_menu.drawMenu(this->m_window);
         m_window.display();
 
         if (auto event = sf::Event{}; m_window.waitEvent(event))
