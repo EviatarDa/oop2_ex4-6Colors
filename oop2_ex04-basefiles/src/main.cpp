@@ -9,11 +9,11 @@ int main()
 }
 
 
-
+//
 //#include <iostream>
 //#include <vector>
 //
-// Hexagon class representing a hexagonal shape
+// //Hexagon class representing a hexagonal shape
 //class Hexagon {
 //public:
 //    int row;
@@ -23,16 +23,18 @@ int main()
 //    Hexagon(int row, int col) : row(row), col(col) {}
 //};
 //
-// Function to generate a hexagonal grid
-//std::vector<Hexagon> generateHexagonalGrid(int numRows, int numCols) {
+// //Function to generate a hexagonal grid
+//std::vector<Hexagon> generateHexagonalGrid(int numRows, int numCols) 
+//{
 //    std::vector<Hexagon> hexagons;
 //
 //    for (int row = 0; row < numRows; ++row) {
 //        for (int col = 0; col < numCols; ++col) {
-//             Compute the position of the hexagon based on the grid layout
+//             //Compute the position of the hexagon based on the grid layout
 //            int x = col * 2;
 //            int y = row * 2;
-//            if (col % 2 == 1) {
+//            if (col % 2 == 1) 
+//            {
 //                y += 1;
 //            }
 //
@@ -44,7 +46,7 @@ int main()
 //    return hexagons;
 //}
 //
-// Function to connect neighboring hexagons
+// //Function to connect neighboring hexagons
 //void connectNeighbors(std::vector<Hexagon>& hexagons, int numRows, int numCols) {
 //    int directions[6][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, 1} };
 //
@@ -57,7 +59,8 @@ int main()
 //            int newRow = row + dir[0];
 //            int newCol = col + dir[1];
 //
-//            if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols) {
+//            if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols)
+//            {
 //                int neighborIndex = newRow * numCols + newCol;
 //                hex.neighbors.push_back(&hexagons[neighborIndex]);
 //            }
@@ -72,7 +75,7 @@ int main()
 //    std::vector<Hexagon> grid = generateHexagonalGrid(numRows, numCols);
 //    connectNeighbors(grid, numRows, numCols);
 //
-//     Print the neighbors of each hexagon in the grid
+//     //Print the neighbors of each hexagon in the grid
 //    for (const Hexagon& hex : grid) {
 //        std::cout << "Hexagon at (" << hex.row << ", " << hex.col << ") - Neighbors: ";
 //        for (const Hexagon* neighbor : hex.neighbors) {

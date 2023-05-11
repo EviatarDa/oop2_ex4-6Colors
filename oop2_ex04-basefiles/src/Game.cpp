@@ -61,6 +61,7 @@ void Game::handleGameClick(sf::Vector2f locaion)
 
 void Game::startGame()
 {
+    init();
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 102, 105));
@@ -76,7 +77,7 @@ void Game::startGame()
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 handleGameClick(location);
-                //startGame();
+                m_board.Check();
                 break;
             }
 
@@ -91,4 +92,9 @@ void Game::startGame()
             m_window.close();
         }
     }
+}
+
+void Game::init()
+{
+
 }

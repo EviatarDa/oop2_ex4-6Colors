@@ -6,6 +6,7 @@ Board::Board(int row, int col)
 	:m_row(row), m_col(col)
 {
 	createBoard();
+	connectNeighbors();
 	createRectangles();
 
 	m_PlayerX = std::make_unique<X>(m_rectangles[2].getPosition());
@@ -21,6 +22,10 @@ void Board::createBoard()
 			m_hexagons.push_back(Hexagon(row, col));
 		}
 	}
+	//m_hexagons[m_col].get().setFillColor(sf::Color::Black);
+	//m_hexagons[m_row*m_col-m_col].get().setFillColor(sf::Color::Black);
+
+	//if(m_hexagons[m_row].getColor() ==  )
 }
 
 void Board::createRectangles()
@@ -28,6 +33,34 @@ void Board::createRectangles()
 	for (int rectangle = 0; rectangle < 6; ++rectangle)
 	{
 		m_rectangles.push_back(createRectangle(rectangle));
+	}
+}
+
+void Board::connectNeighbors()
+{
+	int directions[6][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, 1} };
+
+	for (int index = 0; index < m_hexagons.size(); ++index) 
+	{
+		if (index == 3 * 54)
+		{
+			int num = 1 + 2;
+		}
+		Hexagon& hexagon = m_hexagons[index];
+		int row = hexagon.getRow();
+		int col = hexagon.getCol();
+
+		for (const auto& dir : directions) 
+		{
+			int newRow = row + dir[0];
+			int newCol = col + dir[1];
+
+			if (newRow >= 0 && newRow < m_row && newCol >= 0 && newCol < m_col) 
+			{
+				int neighborIndex = newRow * m_col + newCol;
+				hexagon.addNeighbor(&m_hexagons[neighborIndex]);
+			}
+		}
 	}
 }
 
@@ -70,3 +103,18 @@ sf::RectangleShape Board::getRectangle(Colors color)
 {
 	return m_rectangles[color];
 }
+
+void Board::Check()
+{
+	static int index = 3*54;
+
+	//m_hexagons[index].get().setFillColor(sf::Color::Black);
+	Hexagon& hex = m_hexagons[index];
+	for(int i = 0; i< hex.getNeighbors().size(); i++)
+		if (hex.getNeighbors()[i] != nullptr)
+		{
+			hex.getNeighbors()[i]->get().setFillColor(sf::Color::Black);
+		}
+	index++;
+}
+

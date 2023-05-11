@@ -11,6 +11,7 @@ public:
 	void drawBoard(sf::RenderWindow&);
 	void setPlayerX(Colors);
 	sf::RectangleShape getRectangle(Colors);
+	void Check();
 	
 
 private:
@@ -23,6 +24,7 @@ private:
 
 	void createBoard();
 	void createRectangles();
+	void connectNeighbors();
 	sf::RectangleShape createRectangle(const int) const;
 
 };

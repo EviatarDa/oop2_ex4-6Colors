@@ -8,12 +8,20 @@ class Hexagon
 {
 public:
 	Hexagon(int, int);
-	sf::CircleShape get();
+	sf::CircleShape& get();
 	void setOwner(Owner);
+	int getRow(); 
+	int getCol();
+	void addNeighbor(Hexagon*);
+	sf::Color getColor();
+	std::vector<Hexagon*> getNeighbors();
+	sf::Vector2f getPosition();
 
 private:
 	sf::CircleShape m_hexagon;
 	sf::Color m_color;
-
+	int m_row;
+	int m_col;
+	std::vector<Hexagon*> m_neighbors;
 	Owner m_owner;
 };

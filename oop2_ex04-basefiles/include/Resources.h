@@ -29,9 +29,14 @@ enum Owner
 
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
-const int ROW = 70; //רוחב
-const int COL = 46; //גובה
-const int RADIUS = 10;
+
+const int ROW = 30; //גובה (מספר שורה)
+const int COL = 54; //רוחב מספר עמודה
+const int RADIUS = 15;
+
+const float HEX_WIDTH = RADIUS * std::sqrt(3.f);
+const float HEX_HEIGHT = 2.f * RADIUS;
+
 const int OUTLINE = 2;
 const int TEXTURES = 1;
 

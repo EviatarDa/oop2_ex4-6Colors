@@ -20,4 +20,5 @@ private:
 	Board m_board;
 
 	void startGame();
+	void init();
 };
