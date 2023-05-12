@@ -105,7 +105,7 @@ void Game::startGame()
     init();
     while (m_window.isOpen() && !m_game_over)
     {
-        m_window.clear(sf::Color::Black);//(0, 102, 105));
+        m_window.clear(WINDOW_COLOR);
         m_board.drawBoard(this->m_window);
         m_window.display();
 

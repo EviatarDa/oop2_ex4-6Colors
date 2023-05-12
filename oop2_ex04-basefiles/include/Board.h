@@ -21,6 +21,7 @@ private:
 	int m_row;
 	int m_col;
 	std::vector<Hexagon> m_hexagons;
+	sf::RectangleShape m_grid_frame[4];
 	std::vector<sf::RectangleShape> m_rectangles;
 	std::unique_ptr<X> m_PlayerX;
 	std::unique_ptr<X> m_ComputerX;
@@ -32,6 +33,7 @@ private:
 	void connectNeighbors();
 	void connectHexagonNeighbors(int directions[6][2], int, int, Hexagon&);
 	void locateObjects();
+	void createGridFrame();
 	sf::RectangleShape createRectangle(const int) const;
 
 };

@@ -40,10 +40,10 @@ enum Button
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 
-const int ROW = 10;//31; //גובה (מספר שורה)
-const int COL = 10;//;54; //רוחב מספר עמודה
+const int ROW = 25;//31; //גובה (מספר שורה)
+const int COL = 20;//;54; //רוחב מספר עמודה
 const int RADIUS = 15;
-const int OUTLINE = 2;
+const int OUTLINE = 1;
 
 
 const float HEX_WIDTH = RADIUS * std::sqrt(3.f) + (2*OUTLINE);
@@ -53,9 +53,10 @@ const float HEX_EDGH = 2 * RADIUS * sin(3.14159 / 3);
 const float GRID_WIDTH = HEX_WIDTH * COL;
 const float GRID_HEGHT = ROW * (HEX_HEIGHT * 3.f / 4.f);
 
-
 const int TEXTURES = 4;
 const int BUTTONS = 3;
+
+const sf::Color WINDOW_COLOR = sf::Color(0, 102, 105);
 
 class Resources
 {

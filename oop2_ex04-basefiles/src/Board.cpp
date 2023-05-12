@@ -8,6 +8,7 @@ Board::Board(int row, int col)
 	createBoard();
 	connectNeighbors();
 	createRectangles();
+	createGridFrame();
 	locateObjects();
 }
 
@@ -20,10 +21,6 @@ void Board::createBoard()
 			m_hexagons.push_back(Hexagon(row, col));
 		}
 	}
-	//m_hexagons[m_col].get().setFillColor(sf::Color::Black);
-	//m_hexagons[m_row*m_col-m_col].get().setFillColor(sf::Color::Black);
-
-	//if(m_hexagons[m_row].getColor() ==  )
 }
 
 void Board::createRectangles()
@@ -84,6 +81,30 @@ void Board::locateObjects()
 	m_ComputerX = std::make_unique<X>(m_rectangles[0].getPosition());
 }
 
+void Board::createGridFrame()
+{
+	//up
+	m_grid_frame[0].setSize(sf::Vector2f(GRID_WIDTH+RADIUS, RADIUS));
+	m_grid_frame[0].setFillColor(WINDOW_COLOR);
+	m_grid_frame[0].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - RADIUS,
+		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2)-2*RADIUS +2*OUTLINE) );
+	//down
+	m_grid_frame[1].setSize(sf::Vector2f(GRID_WIDTH + RADIUS, RADIUS));
+	m_grid_frame[1].setFillColor(WINDOW_COLOR);
+	m_grid_frame[1].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - RADIUS,
+		(WINDOW_HEIGHT / 2) + (GRID_HEGHT / 2) - 2 * RADIUS - 2 * OUTLINE));
+	//right
+	m_grid_frame[2].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS));
+	m_grid_frame[2].setFillColor(WINDOW_COLOR);
+	m_grid_frame[2].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) + (GRID_WIDTH / 2) - RADIUS - (HEX_WIDTH / 2) + 2 * OUTLINE ,
+		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS));
+	//lrft
+	m_grid_frame[3].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS));
+	m_grid_frame[3].setFillColor(WINDOW_COLOR);
+	m_grid_frame[3].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - 2*(RADIUS+2*OUTLINE),
+		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS));
+}
+
 sf::RectangleShape Board::createRectangle(const int index) const
 {
 	sf::RectangleShape rec;
@@ -106,10 +127,15 @@ void Board::drawBoard(sf::RenderWindow& window)
 	{
 		window.draw(m_hexagons[hexagon].get());
 	}
+	for (int rectangle = 0; rectangle < 4; rectangle++)
+	{
+		window.draw(m_grid_frame[rectangle]);
+	}
 	for (int rectangle = 0; rectangle < m_rectangles.size(); rectangle++)
 	{
 		window.draw(m_rectangles[rectangle]);
 	}
+
 	window.draw(m_PlayerX->get());
 	window.draw(m_ComputerX->get());
 	window.draw(m_back);
