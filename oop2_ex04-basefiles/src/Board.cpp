@@ -131,6 +131,16 @@ sf::Sprite Board::getBackButton()
 	return m_back;
 }
 
+void Board::backPress()
+{
+	m_back.setColor(sf::Color::Color(255, 255, 255, 150));
+}
+
+void Board::backRelease()
+{
+	m_back.setColor(sf::Color::Color(255, 255, 255));
+}
+
 void Board::Check()
 {
 	static int index =0;

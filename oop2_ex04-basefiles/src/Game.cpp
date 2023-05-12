@@ -35,7 +35,7 @@ void Game::run()
             case sf::Event::MouseMoved:
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-                //handleMouseMoved(location, PLAY, EXIT);
+                handleMenuMouseMoved(location);
             }
 
             }
@@ -73,12 +73,39 @@ void Game::handleMenuClick(sf::Vector2f location)
     }
 }
 
+void Game::handleMenuMouseMoved(sf::Vector2f location)
+{
+    for (int button = Easy; button <= Hard; button++)
+    {
+        if ((m_menu.getButton((Button)button).getGlobalBounds().contains(location)))
+        {
+            m_menu.ButtonPress((Button)button);
+        }
+        else
+        {
+            m_menu.ButtonRelease((Button)button);
+        }
+    }
+}
+
+void Game::handleGameMouseMoved(sf::Vector2f location)
+{
+    if (m_board.getBackButton().getGlobalBounds().contains(location))
+    {
+        m_board.backPress();
+    }
+    else
+    {
+        m_board.backRelease();
+    }
+}
+
 void Game::startGame()
 {
     init();
     while (m_window.isOpen() && !m_game_over)
     {
-        m_window.clear(sf::Color::Color(0, 102, 105));
+        m_window.clear(sf::Color::Black);//(0, 102, 105));
         m_board.drawBoard(this->m_window);
         m_window.display();
 
@@ -92,6 +119,12 @@ void Game::startGame()
                     { event.mouseButton.x, event.mouseButton.y });
                 handleGameClick(location);
                 m_board.Check();
+                break;
+            }
+            case sf::Event::MouseMoved:
+            {
+                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                handleGameMouseMoved(location);
                 break;
             }
 

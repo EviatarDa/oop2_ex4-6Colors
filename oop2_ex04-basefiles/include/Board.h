@@ -13,8 +13,9 @@ public:
 	void setPlayerX(Colors);
 	sf::RectangleShape getRectangle(Colors);
 	sf::Sprite getBackButton();
+	void backPress();
+	void backRelease();
 	void Check();
-	
 
 private:
 	int m_row;

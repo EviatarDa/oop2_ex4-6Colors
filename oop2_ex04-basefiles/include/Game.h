@@ -14,6 +14,8 @@ public:
 	void run();
 	void handleGameClick(sf::Vector2f);
 	void handleMenuClick(sf::Vector2f);
+	void handleMenuMouseMoved(sf::Vector2f);
+	void handleGameMouseMoved(sf::Vector2f);
 
 private:
 	sf::RenderWindow m_window;

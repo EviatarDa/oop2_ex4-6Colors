@@ -10,10 +10,14 @@ public:
 	Menu();
 	sf::Sprite getButton(const Button) const;
 	void drawMenu(sf::RenderWindow&);
+	void ButtonPress(const Button);
+	void ButtonRelease(const Button);
 
 private:
 
 	sf::Sprite m_backgroung;
 	sf::Sprite m_buttons[BUTTONS];
+	sf::Sprite m_back_buttons[BUTTONS];
 
+	void locateObjects();
 };
