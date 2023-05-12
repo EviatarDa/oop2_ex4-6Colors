@@ -12,6 +12,7 @@ public:
 	void drawBoard(sf::RenderWindow&);
 	void setPlayerX(Colors);
 	sf::RectangleShape getRectangle(Colors);
+	sf::Sprite getBackButton();
 	void Check();
 	
 
@@ -22,12 +23,14 @@ private:
 	std::vector<sf::RectangleShape> m_rectangles;
 	std::unique_ptr<X> m_PlayerX;
 	std::unique_ptr<X> m_ComputerX;
+	sf::Sprite m_back;
 	Graph<Hexagon> m_graph;
 
 	void createBoard();
 	void createRectangles();
 	void connectNeighbors();
 	void connectHexagonNeighbors(int directions[6][2], int, int, Hexagon&);
+	void locateObjects();
 	sf::RectangleShape createRectangle(const int) const;
 
 };

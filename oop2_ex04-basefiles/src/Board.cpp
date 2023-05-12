@@ -8,9 +8,7 @@ Board::Board(int row, int col)
 	createBoard();
 	connectNeighbors();
 	createRectangles();
-
-	m_PlayerX = std::make_unique<X>(m_rectangles[2].getPosition());
-	m_ComputerX = std::make_unique<X>(m_rectangles[0].getPosition());
+	locateObjects();
 }
 
 void Board::createBoard()
@@ -76,6 +74,16 @@ void Board::connectHexagonNeighbors(int dir[6][2], int row, int col, Hexagon& he
 	}
 }
 
+void Board::locateObjects()
+{
+	m_back.setTexture(Resources::instance().getTexture((Textures)Back));
+	m_back.scale(sf::Vector2f(WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width,
+		WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width));
+	m_back.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.85, WINDOW_HEIGHT * 0.88));
+	m_PlayerX = std::make_unique<X>(m_rectangles[2].getPosition());
+	m_ComputerX = std::make_unique<X>(m_rectangles[0].getPosition());
+}
+
 sf::RectangleShape Board::createRectangle(const int index) const
 {
 	sf::RectangleShape rec;
@@ -104,6 +112,8 @@ void Board::drawBoard(sf::RenderWindow& window)
 	}
 	window.draw(m_PlayerX->get());
 	window.draw(m_ComputerX->get());
+	window.draw(m_back);
+
 }
 
 void Board::setPlayerX(Colors color)
@@ -114,6 +124,11 @@ void Board::setPlayerX(Colors color)
 sf::RectangleShape Board::getRectangle(Colors color)
 {
 	return m_rectangles[color];
+}
+
+sf::Sprite Board::getBackButton()
+{
+	return m_back;
 }
 
 void Board::Check()

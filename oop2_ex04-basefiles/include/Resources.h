@@ -19,6 +19,7 @@ enum Textures
 {
     X_texture,
     Background,
+    Back,
 };
 
 enum Owner
@@ -30,7 +31,7 @@ enum Owner
 
 enum Button
 {
-    Eazy,
+    Easy,
     Medium,
     Hard,
 };
@@ -46,7 +47,7 @@ const float HEX_WIDTH = RADIUS * std::sqrt(3.f);
 const float HEX_HEIGHT = 2.f * RADIUS;
 
 const int OUTLINE = 2;
-const int TEXTURES = 2;
+const int TEXTURES = 3;
 const int BUTTONS = 3;
 
 class Resources

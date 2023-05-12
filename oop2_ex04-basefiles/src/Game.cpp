@@ -3,7 +3,7 @@
 #include "Game.h"
 
 Game::Game()
-    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Colors"), m_board(ROW, COL)
+    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Colors"), m_board(ROW, COL), m_game_over(false)
 {
     m_window.setFramerateLimit(60);
 }
@@ -28,8 +28,7 @@ void Game::run()
             {
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
-                //handleClick(location);
-                startGame();
+                handleMenuClick(location);
                 break;
             }
 
@@ -57,12 +56,27 @@ void Game::handleGameClick(sf::Vector2f locaion)
             m_board.setPlayerX((Colors)color);
         }
     }
+    if (m_board.getBackButton().getGlobalBounds().contains(locaion))
+    {
+        m_game_over = true;
+    }
+}
+
+void Game::handleMenuClick(sf::Vector2f location)
+{
+    for (int button = Easy ; button <= Hard; button++)
+    {
+        if (m_menu.getButton((Button)button).getGlobalBounds().contains(location))
+        {
+            startGame();
+        }
+    }
 }
 
 void Game::startGame()
 {
     init();
-    while (m_window.isOpen())
+    while (m_window.isOpen() && !m_game_over)
     {
         m_window.clear(sf::Color::Color(0, 102, 105));
         m_board.drawBoard(this->m_window);
@@ -96,5 +110,5 @@ void Game::startGame()
 
 void Game::init()
 {
-
+    m_game_over = false;
 }
