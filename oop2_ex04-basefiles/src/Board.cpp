@@ -21,6 +21,11 @@ void Board::createBoard()
 			m_hexagons.push_back(Hexagon(row, col));
 		}
 	}
+	if(m_hexagons[m_col - 1].getColor() == m_hexagons[m_row * m_col - m_col].getColor())
+	{
+		m_hexagons[m_col - 1].get().setFillColor(Resources::instance().getColorArray()[Cyan]);
+		m_hexagons[m_row * m_col - m_col].get().setFillColor(Resources::instance().getColorArray()[Blue]);
+	}
 }
 
 void Board::createRectangles()

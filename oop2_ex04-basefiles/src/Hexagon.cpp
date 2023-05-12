@@ -13,10 +13,9 @@ Hexagon::Hexagon(int row, int col)
 	int randomNumber = distribution(generator);  // Generate a random number
 
 	m_hexagon.setOrigin(0, 0);
-	m_color = Resources::instance().getColorArray()[randomNumber % 6];
 	m_hexagon.setOrigin(25, 25);
 	m_hexagon.setPosition(getPosition());
-	m_hexagon.setFillColor(m_color);
+	m_hexagon.setFillColor(Resources::instance().getColorArray()[randomNumber % 6]);
 	m_hexagon.setOutlineThickness(OUTLINE);
 	m_hexagon.setOutlineColor(sf::Color::Black);
 
@@ -25,7 +24,6 @@ Hexagon::Hexagon(int row, int col)
 sf::CircleShape& Hexagon::get()
 {
 	return m_hexagon;
-
 }
 
 void Hexagon::setOwner(Owner owner)
@@ -50,7 +48,7 @@ void Hexagon::addNeighbor(Hexagon* hexagon)
 
 sf::Color Hexagon::getColor()
 {
-	return m_color;
+	return m_hexagon.getFillColor();
 }
 
 std::vector<Hexagon*> Hexagon::getNeighbors()

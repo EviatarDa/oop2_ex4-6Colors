@@ -19,7 +19,7 @@ public:
 
 private:
 	sf::CircleShape m_hexagon;
-	sf::Color m_color;
+	//sf::Color m_color;
 	int m_row;
 	int m_col;
 	std::vector<Hexagon*> m_neighbors;
