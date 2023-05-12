@@ -34,8 +34,9 @@ void Resources::LoadFromFile()
 	m_textures[Background].loadFromFile("Background.png");
 	m_textures[Background].setSmooth(true);
 	m_textures[Back].loadFromFile("Back.png");
+	m_textures[Six_colors].loadFromFile("Six_colors.png");
 
-	m_Buttons[0].loadFromFile("Easy.png");
-	m_Buttons[1].loadFromFile("Medium.png");
-	m_Buttons[2].loadFromFile("Hard.png");
+	m_Buttons[Easy].loadFromFile("Easy.png");
+	m_Buttons[Medium].loadFromFile("Medium.png");
+	m_Buttons[Hard].loadFromFile("Hard.png");
 }

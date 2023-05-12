@@ -60,7 +60,8 @@ std::vector<Hexagon*> Hexagon::getNeighbors()
 
 sf::Vector2f Hexagon::getPosition()
 {
-	float x = m_col * HEX_WIDTH + ((m_row % 2 == 0) ? HEX_WIDTH / 2.f : 0.f)+10;
-	float y = m_row * (HEX_HEIGHT * 3.f / 4.f) +10;
+	float x = m_col * HEX_WIDTH + ((m_row % 2 == 0) ? HEX_WIDTH / 2.f : 0.f) + (WINDOW_WIDTH/2)- (GRID_WIDTH/2);
+	float y = (m_row * (HEX_HEIGHT * 3.f / 4.f) + (WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2));
+
 	return sf::Vector2f(x, y);
 }

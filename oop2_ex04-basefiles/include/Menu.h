@@ -18,6 +18,7 @@ private:
 	sf::Sprite m_backgroung;
 	sf::Sprite m_buttons[BUTTONS];
 	sf::Sprite m_back_buttons[BUTTONS];
+	sf::Sprite m_label;
 
 	void locateObjects();
 };

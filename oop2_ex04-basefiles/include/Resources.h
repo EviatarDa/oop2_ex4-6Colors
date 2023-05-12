@@ -20,6 +20,7 @@ enum Textures
     X_texture,
     Background,
     Back,
+    Six_colors
 };
 
 enum Owner
@@ -39,15 +40,21 @@ enum Button
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 
-const int ROW = 31; //גובה (מספר שורה)
-const int COL = 54; //רוחב מספר עמודה
+const int ROW = 10;//31; //גובה (מספר שורה)
+const int COL = 10;//;54; //רוחב מספר עמודה
 const int RADIUS = 15;
-
-const float HEX_WIDTH = RADIUS * std::sqrt(3.f);
-const float HEX_HEIGHT = 2.f * RADIUS;
-
 const int OUTLINE = 2;
-const int TEXTURES = 3;
+
+
+const float HEX_WIDTH = RADIUS * std::sqrt(3.f) + (2*OUTLINE);
+const float HEX_HEIGHT = 2.f * RADIUS + (2 * OUTLINE);
+const float HEX_EDGH = 2 * RADIUS * sin(3.14159 / 3);
+
+const float GRID_WIDTH = HEX_WIDTH * COL;
+const float GRID_HEGHT = ROW * (HEX_HEIGHT * 3.f / 4.f);
+
+
+const int TEXTURES = 4;
 const int BUTTONS = 3;
 
 class Resources

@@ -7,6 +7,8 @@ Menu::Menu()
 	m_backgroung.setTexture(Resources::instance().getTexture(Background));
 	m_backgroung.scale(0.8f, 0.8f);
 
+	m_label.setTexture(Resources::instance().getTexture(Six_colors));
+
 	for (int button = Easy; button <= Hard; button++)
 	{
 		m_buttons[button].setTexture(Resources::instance().getButton((Button)button));
@@ -28,6 +30,7 @@ void Menu::drawMenu(sf::RenderWindow& window)
 		window.draw(m_back_buttons[button]);
 		window.draw(m_buttons[button]);
 	}
+	window.draw(m_label);
 }
 
 void Menu::ButtonPress(const Button button)
@@ -63,4 +66,11 @@ void Menu::locateObjects()
 	m_back_buttons[Easy].setColor(sf::Color::Green);
 	m_back_buttons[Medium].setColor(sf::Color::Blue);
 	m_back_buttons[Hard].setColor(sf::Color::Color(255, 119, 0));
+
+	m_label.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.1));
+
+	m_label.scale(sf::Vector2f(WINDOW_WIDTH * 0.5 / m_label.getTextureRect().width,
+		WINDOW_WIDTH * 0.5 / m_label.getTextureRect().width));
+
+
 }
