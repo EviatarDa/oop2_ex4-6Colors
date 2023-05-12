@@ -35,5 +35,5 @@ private:
 	void locateObjects();
 	void createGridFrame();
 	sf::RectangleShape createRectangle(const int) const;
-
+	Colors color2Enum(sf::Color);
 };

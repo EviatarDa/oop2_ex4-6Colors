@@ -82,8 +82,8 @@ void Board::locateObjects()
 	m_back.scale(sf::Vector2f(WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width,
 		WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width));
 	m_back.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.85, WINDOW_HEIGHT * 0.88));
-	m_PlayerX = std::make_unique<X>(m_rectangles[2].getPosition());
-	m_ComputerX = std::make_unique<X>(m_rectangles[0].getPosition());
+	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col-1].getColor())].getPosition());
+	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
 }
 
 void Board::createGridFrame()
@@ -123,6 +123,22 @@ sf::RectangleShape Board::createRectangle(const int index) const
 	rec.setFillColor(Resources::instance().getColorArray()[index]);
 
 	return rec;
+}
+
+Colors Board::color2Enum(sf::Color color)
+{
+	if (color == sf::Color::Cyan)
+		return Cyan;
+	else if (color == sf::Color::Blue)
+		return Blue;
+	else if (color == sf::Color::Green)
+		return Green;
+	else if (color == sf::Color::Red)
+		return Red;
+	else if (color == sf::Color::Yellow)
+		return Yellow;
+	else if (color == sf::Color::Color(255, 119, 0))
+		return Orange;
 }
 
 
