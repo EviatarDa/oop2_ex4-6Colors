@@ -237,3 +237,35 @@ void Board::init()
 	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col - 1].getColor())].getPosition());
 	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
 }
+
+int Board::size()
+{
+	return m_hexagons.size();
+}
+
+int Board::playerArea()
+{
+	std::vector<bool> currTree = m_graph.BFS(m_row * m_col - m_col);
+	int counter = countArea(currTree);
+	return counter;
+}
+
+int Board::computerArea()
+{
+	std::vector<bool> currTree = m_graph.BFS(m_col - 1);
+	int counter = countArea(currTree);
+	return counter;
+}
+
+int Board::countArea(std::vector<bool> vec)
+{
+	int counter = 0;
+	for (int index = 0; index < vec.size(); index++)
+	{
+		if (vec[index])
+		{
+			counter++;
+		}
+	}
+	return counter;
+}

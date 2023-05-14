@@ -30,4 +30,6 @@ private:
 	void startGame();
 	void init();
 	void computerTurn(Colors);
+	void winLoop();
+	void loseLoop();
 };

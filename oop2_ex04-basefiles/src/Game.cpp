@@ -69,6 +69,11 @@ void Game::playerTurn(sf::Vector2f locaion)
     {
         m_game_over = true;
     }
+
+    if (m_board.playerArea() > m_board.size()/2)
+    {
+        winLoop();
+    }
 }
 
 void Game::handleMenuClick(sf::Vector2f location)
@@ -141,7 +146,6 @@ void Game::startGame()
                     playerTurn(location);
                     computerTurn(m_algorithm->getNextColor());
                 }
-                //m_board.Check();
                 break;
             }
             case sf::Event::MouseMoved:
@@ -182,5 +186,22 @@ void Game::computerTurn(Colors color)
         m_board.setComputerX(color);
         m_board.playTurn(m_player_turn, color);
         m_player_turn = true;
+
+        if (m_board.computerArea() > m_board.size() / 2)
+        {
+            loseLoop();
+        }
     }
+}
+
+void Game::winLoop()
+{
+    m_game_over = true;
+    //TODO אנימציה
+}
+
+void Game::loseLoop()
+{
+    m_game_over = true;
+    //TODO אנימציה
 }

@@ -20,6 +20,10 @@ public:
 	Colors getPlayerColor();
 	void playTurn(bool, Colors);
 	void init();
+	int size();
+	int playerArea();
+	int computerArea();
+	int countArea(std::vector<bool>);
 
 private:
 	int m_row;
