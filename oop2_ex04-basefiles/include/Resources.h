@@ -40,8 +40,8 @@ enum Button
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 
-const int ROW = 25;//31; //גובה (מספר שורה)
-const int COL = 20;//;54; //רוחב מספר עמודה
+const int ROW = 25; //גובה (מספר שורה)
+const int COL = 20; //רוחב מספר עמודה
 const int RADIUS = 15;
 const int OUTLINE = 1;
 

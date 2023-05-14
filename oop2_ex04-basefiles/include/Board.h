@@ -16,6 +16,9 @@ public:
 	void backPress();
 	void backRelease();
 	void Check();
+	Colors getComputerColor();
+	Colors getPlayerColor();
+	void playTurn(bool, Colors);
 
 private:
 	int m_row;
@@ -27,6 +30,7 @@ private:
 	std::unique_ptr<X> m_ComputerX;
 	sf::Sprite m_back;
 	Graph<Hexagon> m_graph;
+
 
 	void createBoard();
 	void createRectangles();

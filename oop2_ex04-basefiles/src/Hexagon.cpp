@@ -63,3 +63,13 @@ sf::Vector2f Hexagon::getPosition()
 
 	return sf::Vector2f(x, y);
 }
+
+int Hexagon::getIndex()
+{
+	return COL * m_row + m_col;
+}
+
+void Hexagon::setColor(Colors color)
+{
+	m_hexagon.setFillColor(Resources::instance().getColorArray()[color]);
+}

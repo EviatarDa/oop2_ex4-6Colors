@@ -70,7 +70,8 @@ void Board::connectHexagonNeighbors(int dir[6][2], int row, int col, Hexagon& he
 			int neighborIndex = newRow * m_col + newCol;
 			if(hexagon.getColor() == m_hexagons[neighborIndex].getColor())
 			{
-				hexagon.addNeighbor(&m_hexagons[neighborIndex]);
+				//hexagon.addNeighbor(&m_hexagons[neighborIndex]);// TODO מיותר
+				m_graph.addNeighbor(hexagon.getIndex(), &m_hexagons[neighborIndex]);
 			}
 		}
 	}
@@ -82,8 +83,8 @@ void Board::locateObjects()
 	m_back.scale(sf::Vector2f(WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width,
 		WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width));
 	m_back.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.85, WINDOW_HEIGHT * 0.88));
-	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col-1].getColor())].getPosition());
-	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
+	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col-1].getColor())].getPosition());
+	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
 }
 
 void Board::createGridFrame()
@@ -202,3 +203,31 @@ void Board::Check()
 	index++;
 }
 
+Colors Board::getComputerColor()
+{
+	return color2Enum(m_hexagons[m_col - 1].getColor());
+}
+
+Colors Board::getPlayerColor()
+{
+	return color2Enum(m_hexagons[m_row * m_col - m_col].getColor());
+}
+
+void Board::playTurn(bool player_turn, Colors color)
+{
+	std::vector<bool> index_to_paint;
+	if (player_turn)
+		index_to_paint = m_graph.BFS(m_row * m_col - m_col);
+	else
+		index_to_paint = m_graph.BFS(m_col - 1);
+
+	for (int index = 0; index < m_hexagons.size(); index++)
+	{
+		if (index_to_paint[index])
+		{
+			m_hexagons[index].setColor(color);
+		}
+	}
+	m_graph.clear();
+	connectNeighbors();
+}

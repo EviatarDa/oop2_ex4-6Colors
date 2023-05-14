@@ -23,6 +23,7 @@ private:
 	Menu m_menu;
 	Board m_board;
 	bool m_game_over;
+	bool m_player_turn;
 
 	void startGame();
 	void init();

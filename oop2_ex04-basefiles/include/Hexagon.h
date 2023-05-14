@@ -16,6 +16,9 @@ public:
 	sf::Color getColor();
 	std::vector<Hexagon*> getNeighbors();
 	sf::Vector2f getPosition();
+	int getIndex();
+	void setColor(Colors);
+	
 
 private:
 	sf::CircleShape m_hexagon;

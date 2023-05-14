@@ -3,7 +3,7 @@
 #include "Game.h"
 
 Game::Game()
-    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Colors"), m_board(ROW, COL), m_game_over(false)
+    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Colors"), m_board(ROW, COL), m_game_over(false), m_player_turn(true)
 {
     m_window.setFramerateLimit(60);
 }
@@ -49,11 +49,19 @@ void Game::run()
 
 void Game::handleGameClick(sf::Vector2f locaion)
 {
-    for(int color = Cyan ; color <= Orange ; color++)
+    if(m_player_turn)
     {
-        if (m_board.getRectangle((Colors)color).getGlobalBounds().contains(locaion))
+        for (int color = Cyan; color <= Orange; color++)
         {
-            m_board.setPlayerX((Colors)color);
+            if (m_board.getRectangle((Colors)color).getGlobalBounds().contains(locaion))
+            {
+                if(color != m_board.getPlayerColor() && color != m_board.getComputerColor())
+                {
+                    m_board.setPlayerX((Colors)color);
+                    m_board.playTurn(m_player_turn, (Colors)color);
+                   // m_player_turn = false;
+                }
+            }
         }
     }
     if (m_board.getBackButton().getGlobalBounds().contains(locaion))
@@ -118,7 +126,8 @@ void Game::startGame()
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 handleGameClick(location);
-                m_board.Check();
+                //TODO computer turn
+                //m_board.Check();
                 break;
             }
             case sf::Event::MouseMoved:
