@@ -5,6 +5,8 @@
 Board::Board(int row, int col)
 	:m_row(row), m_col(col), m_graph(row* col)
 {
+	m_backgroung.setTexture(Resources::instance().getTexture(GameBackground));
+	m_backgroung.scale(2.6f, 2.6f);
 	createBoard();
 	connectNeighbors();
 	createRectangles();
@@ -90,25 +92,25 @@ void Board::locateObjects()
 void Board::createGridFrame()
 {
 	//up
-	m_grid_frame[0].setSize(sf::Vector2f(GRID_WIDTH+RADIUS, RADIUS));
+	m_grid_frame[0].setSize(sf::Vector2f(GRID_WIDTH+RADIUS, 3/2*RADIUS));
 	m_grid_frame[0].setFillColor(WINDOW_COLOR);
 	m_grid_frame[0].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - RADIUS,
 		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2)-2*RADIUS +2*OUTLINE) );
 	//down
-	m_grid_frame[1].setSize(sf::Vector2f(GRID_WIDTH + RADIUS, RADIUS));
+	m_grid_frame[1].setSize(sf::Vector2f(GRID_WIDTH + RADIUS, 3/2 *RADIUS));
 	m_grid_frame[1].setFillColor(WINDOW_COLOR);
 	m_grid_frame[1].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - RADIUS,
 		(WINDOW_HEIGHT / 2) + (GRID_HEGHT / 2) - 2 * RADIUS - 2 * OUTLINE));
 	//right
-	m_grid_frame[2].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS));
+	m_grid_frame[2].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS - 4 * OUTLINE));
 	m_grid_frame[2].setFillColor(WINDOW_COLOR);
-	m_grid_frame[2].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) + (GRID_WIDTH / 2) - RADIUS - (HEX_WIDTH / 2) + 2 * OUTLINE ,
-		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS));
+	m_grid_frame[2].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) + (GRID_WIDTH / 2) - RADIUS - (HEX_WIDTH / 2) + 3 * OUTLINE,
+		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS + 2 * OUTLINE));
 	//lrft
-	m_grid_frame[3].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS));
+	m_grid_frame[3].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS - 4 * OUTLINE));
 	m_grid_frame[3].setFillColor(WINDOW_COLOR);
-	m_grid_frame[3].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - 2*(RADIUS+2*OUTLINE),
-		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS));
+	m_grid_frame[3].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) - (GRID_WIDTH / 2) - 2*(RADIUS+2*OUTLINE) +HEX_WIDTH/2 - 4*OUTLINE,
+		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS + 2*OUTLINE));
 }
 
 sf::RectangleShape Board::createRectangle(const int index) const
@@ -145,6 +147,7 @@ Colors Board::color2Enum(sf::Color color)
 
 void Board::drawBoard(sf::RenderWindow& window)
 {
+	window.draw(m_backgroung);
 	for (int hexagon = 0; hexagon < m_hexagons.size(); hexagon++)
 	{
 		window.draw(m_hexagons[hexagon].get());
@@ -195,19 +198,6 @@ void Board::backRelease()
 	m_back.setColor(sf::Color::Color(255, 255, 255));
 }
 
-void Board::Check()
-{
-	static int index =0;
-
-	//m_hexagons[index].get().setFillColor(sf::Color::Black);
-	Hexagon& hex = m_hexagons[index];
-	for(int i = 0; i< hex.getNeighbors().size(); i++)
-		if (hex.getNeighbors()[i] != nullptr)
-		{
-			hex.getNeighbors()[i]->get().setFillColor(sf::Color::Black);
-		}
-	index++;
-}
 
 Colors Board::getComputerColor()
 {
@@ -236,4 +226,14 @@ void Board::playTurn(bool player_turn, Colors color)
 	}
 	m_graph.clear();
 	connectNeighbors();
+}
+
+void Board::init()
+{
+	m_hexagons.clear();
+	m_graph.clear();
+	createBoard();
+	connectNeighbors();
+	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col - 1].getColor())].getPosition());
+	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
 }

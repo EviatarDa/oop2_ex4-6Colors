@@ -20,7 +20,8 @@ enum Textures
     X_texture,
     Background,
     Back,
-    Six_colors
+    Six_colors,
+    GameBackground,
 };
 
 enum Owner
@@ -52,10 +53,11 @@ const float HEX_EDGH = 2 * RADIUS * sin(3.14159 / 3);
 const float GRID_WIDTH = HEX_WIDTH * COL;
 const float GRID_HEGHT = ROW * (HEX_HEIGHT * 3.f / 4.f);
 
-const int TEXTURES = 4;
+const int TEXTURES = 5;
 const int BUTTONS = 3;
 
-const sf::Color WINDOW_COLOR = sf::Color(0, 102, 105);
+const sf::Color WINDOW_COLOR = sf::Color::Black;
+
 
 class Resources
 {

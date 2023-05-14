@@ -4,7 +4,7 @@
 class HardAlgorithm : public Algorithm
 {
 public:
-	sf::Color getNextColor();
+	Colors getNextColor();
 
 private:
 

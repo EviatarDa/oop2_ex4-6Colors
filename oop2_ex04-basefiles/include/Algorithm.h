@@ -6,7 +6,7 @@
 class Algorithm
 {
 public:
-	virtual sf::Color getNextColor() = 0;
+	virtual Colors getNextColor() = 0;
 
 private:	
 };

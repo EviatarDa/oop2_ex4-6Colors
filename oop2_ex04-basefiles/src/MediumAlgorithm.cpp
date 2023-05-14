@@ -2,7 +2,7 @@
 
 #include "MediumAlgorithm.h"
 
-sf::Color MediumAlgorithm::getNextColor()
+Colors MediumAlgorithm::getNextColor()
 {
-    return sf::Color::Blue;
+    return Blue;
 }

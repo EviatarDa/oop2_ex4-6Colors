@@ -16,10 +16,10 @@ public:
 	sf::Sprite getBackButton();
 	void backPress();
 	void backRelease();
-	void Check();
 	Colors getComputerColor();
 	Colors getPlayerColor();
 	void playTurn(bool, Colors);
+	void init();
 
 private:
 	int m_row;
@@ -31,6 +31,8 @@ private:
 	std::unique_ptr<X> m_ComputerX;
 	sf::Sprite m_back;
 	Graph<Hexagon> m_graph;
+	sf::Sprite m_backgroung;
+
 
 
 	void createBoard();

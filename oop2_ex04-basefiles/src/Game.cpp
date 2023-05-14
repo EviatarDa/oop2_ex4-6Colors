@@ -51,23 +51,20 @@ void Game::run()
     }
 }
 
-void Game::handleGameClick(sf::Vector2f locaion)
+void Game::playerTurn(sf::Vector2f locaion)
 {
-    if(m_player_turn)
-    {
-        for (int color = Cyan; color <= Orange; color++)
-        {
-            if (m_board.getRectangle((Colors)color).getGlobalBounds().contains(locaion))
-            {
-                if(color != m_board.getPlayerColor() && color != m_board.getComputerColor())
-                {
-                    m_board.setPlayerX((Colors)color);
-                    m_board.playTurn(m_player_turn, (Colors)color);
-                   // m_player_turn = false;
-                }
-            }
-        }
-    }
+	for (int color = Cyan; color <= Orange; color++)
+	{
+		if (m_board.getRectangle((Colors)color).getGlobalBounds().contains(locaion))
+		{
+			if (color != m_board.getPlayerColor() && color != m_board.getComputerColor())
+			{
+				m_board.setPlayerX((Colors)color);
+				m_board.playTurn(m_player_turn, (Colors)color);
+				m_player_turn = false;
+			}
+		}
+	}
     if (m_board.getBackButton().getGlobalBounds().contains(locaion))
     {
         m_game_over = true;
@@ -138,9 +135,12 @@ void Game::startGame()
             {
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
-                handleGameClick(location);
-                computerTurn(m_algorithm->getNextColor());
-                //TODO computer turn
+
+                if (m_player_turn)
+                {
+                    playerTurn(location);
+                    computerTurn(m_algorithm->getNextColor());
+                }
                 //m_board.Check();
                 break;
             }
@@ -167,9 +167,20 @@ void Game::startGame()
 void Game::init()
 {
     m_game_over = false;
+    m_player_turn = true;
+    m_board.init();
 }
 
-void Game::computerTurn(sf::Color color)
+void Game::computerTurn(Colors color)
 {
-  //  m_board.setComputerX(Resources::instance().getColorArray()[color]);
+    if(!m_player_turn)
+    {
+        while ((color == m_board.getPlayerColor() || color == m_board.getComputerColor()))
+        {
+            color = m_algorithm->getNextColor();
+        }
+        m_board.setComputerX(color);
+        m_board.playTurn(m_player_turn, color);
+        m_player_turn = true;
+    }
 }

@@ -2,7 +2,7 @@
 
 #include "HardAlgorithm.h"
 
-sf::Color HardAlgorithm::getNextColor()
+Colors HardAlgorithm::getNextColor()
 {
-    return sf::Color::Blue;
+    return Blue;
 }

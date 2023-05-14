@@ -4,7 +4,7 @@
 class MediumAlgorithm :public Algorithm
 {
 public:
-	sf::Color getNextColor();
+	Colors getNextColor();
 
 private:
 
