@@ -45,7 +45,6 @@ const int COL = 20; //רוחב מספר עמודה
 const int RADIUS = 15;
 const int OUTLINE = 1;
 
-
 const float HEX_WIDTH = RADIUS * std::sqrt(3.f) + (2*OUTLINE);
 const float HEX_HEIGHT = 2.f * RADIUS + (2 * OUTLINE);
 const float HEX_EDGH = 2 * RADIUS * sin(3.14159 / 3);

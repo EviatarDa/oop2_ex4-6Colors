@@ -169,6 +169,12 @@ void Board::setPlayerX(Colors color)
 	m_PlayerX = std::make_unique<X>(m_rectangles[color].getPosition());
 }
 
+void Board::setComputerX(Colors color)
+{
+	m_ComputerX = std::make_unique<X>(m_rectangles[color].getPosition());
+
+}
+
 sf::RectangleShape Board::getRectangle(Colors color)
 {
 	return m_rectangles[color];

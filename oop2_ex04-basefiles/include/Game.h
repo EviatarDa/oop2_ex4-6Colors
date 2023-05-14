@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "Algorithm.h"
 #include "Resources.h"
 #include "Board.h"
 #include "Menu.h"
@@ -24,7 +25,9 @@ private:
 	Board m_board;
 	bool m_game_over;
 	bool m_player_turn;
+	std::unique_ptr<Algorithm> m_algorithm;
 
 	void startGame();
 	void init();
+	void computerTurn(sf::Color);
 };

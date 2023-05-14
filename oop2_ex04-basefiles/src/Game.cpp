@@ -1,9 +1,13 @@
 #pragma once
 
 #include "Game.h"
+#include "EasyAlgorithm.h"
+#include "MediumAlgorithm.h"
+#include "HardAlgorithm.h"
 
 Game::Game()
-    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Colors"), m_board(ROW, COL), m_game_over(false), m_player_turn(true)
+    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Colors"), m_board(ROW, COL), m_game_over(false), m_player_turn(true),
+    m_algorithm(std::make_unique<EasyAlgorithm>())
 {
     m_window.setFramerateLimit(60);
 }
@@ -72,13 +76,22 @@ void Game::handleGameClick(sf::Vector2f locaion)
 
 void Game::handleMenuClick(sf::Vector2f location)
 {
-    for (int button = Easy ; button <= Hard; button++)
+    if (m_menu.getButton(Easy).getGlobalBounds().contains(location))
     {
-        if (m_menu.getButton((Button)button).getGlobalBounds().contains(location))
-        {
-            startGame();
-        }
+        m_algorithm.reset(new EasyAlgorithm);
+        startGame();
     }
+    else if (m_menu.getButton(Medium).getGlobalBounds().contains(location))
+    {
+        m_algorithm.reset(new MediumAlgorithm);
+        startGame();
+    }
+    if (m_menu.getButton(Hard).getGlobalBounds().contains(location))
+    {
+        m_algorithm.reset(new HardAlgorithm);
+        startGame();
+    }
+
 }
 
 void Game::handleMenuMouseMoved(sf::Vector2f location)
@@ -126,6 +139,7 @@ void Game::startGame()
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 handleGameClick(location);
+                computerTurn(m_algorithm->getNextColor());
                 //TODO computer turn
                 //m_board.Check();
                 break;
@@ -153,4 +167,9 @@ void Game::startGame()
 void Game::init()
 {
     m_game_over = false;
+}
+
+void Game::computerTurn(sf::Color color)
+{
+  //  m_board.setComputerX(Resources::instance().getColorArray()[color]);
 }

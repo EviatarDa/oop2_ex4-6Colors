@@ -8,14 +8,14 @@ Hexagon::Hexagon(int row, int col)
 {
 	std::random_device rd;                       // Obtain a random seed from the hardware
 	std::mt19937 generator(rd());                 // Initialize the random number generator
-	std::uniform_int_distribution<int> distribution(0, 99);  // Define the range of the random numbers
+	std::uniform_int_distribution<int> distribution(0, 5);  // Define the range of the random numbers
 
 	int randomNumber = distribution(generator);  // Generate a random number
 
 	m_hexagon.setOrigin(0, 0);
 	m_hexagon.setOrigin(25, 25);
 	m_hexagon.setPosition(getPosition());
-	m_hexagon.setFillColor(Resources::instance().getColorArray()[randomNumber % 6]);
+	m_hexagon.setFillColor(Resources::instance().getColorArray()[randomNumber]);
 	m_hexagon.setOutlineThickness(OUTLINE);
 	m_hexagon.setOutlineColor(sf::Color::Black);
 

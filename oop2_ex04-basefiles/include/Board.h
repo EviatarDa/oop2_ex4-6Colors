@@ -11,6 +11,7 @@ public:
 	Board(int, int);
 	void drawBoard(sf::RenderWindow&);
 	void setPlayerX(Colors);
+	void setComputerX(Colors);
 	sf::RectangleShape getRectangle(Colors);
 	sf::Sprite getBackButton();
 	void backPress();
