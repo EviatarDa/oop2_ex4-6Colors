@@ -269,3 +269,8 @@ int Board::countArea(std::vector<bool> vec)
 	}
 	return counter;
 }
+
+Graph<Hexagon> Board::getGraph()
+{
+	return m_graph;
+}

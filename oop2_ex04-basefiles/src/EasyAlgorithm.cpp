@@ -1,7 +1,7 @@
 #include "EasyAlgorithm.h"
 #pragma once
 
-Colors EasyAlgorithm::getNextColor()
+Colors EasyAlgorithm::getNextColor(Graph<Hexagon> graph)
 {
 	std::random_device rd;                       // Obtain a random seed from the hardware
 	std::mt19937 generator(rd());                 // Initialize the random number generator

@@ -144,7 +144,7 @@ void Game::startGame()
                 if (m_player_turn)
                 {
                     playerTurn(location);
-                    computerTurn(m_algorithm->getNextColor());
+                    computerTurn(m_algorithm->getNextColor(m_board.getGraph()));
                 }
                 break;
             }
@@ -181,7 +181,7 @@ void Game::computerTurn(Colors color)
     {
         while ((color == m_board.getPlayerColor() || color == m_board.getComputerColor()))
         {
-            color = m_algorithm->getNextColor();
+            color = m_algorithm->getNextColor(m_board.getGraph());
         }
         m_board.setComputerX(color);
         m_board.playTurn(m_player_turn, color);

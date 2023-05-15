@@ -24,6 +24,7 @@ public:
 	int playerArea();
 	int computerArea();
 	int countArea(std::vector<bool>);
+	Graph<Hexagon> getGraph();
 
 private:
 	int m_row;

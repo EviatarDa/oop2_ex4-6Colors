@@ -4,7 +4,7 @@
 class HardAlgorithm : public Algorithm
 {
 public:
-	Colors getNextColor();
+	Colors getNextColor(Graph<Hexagon>);
 
 private:
 

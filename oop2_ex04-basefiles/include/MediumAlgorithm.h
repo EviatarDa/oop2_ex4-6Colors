@@ -4,7 +4,7 @@
 class MediumAlgorithm :public Algorithm
 {
 public:
-	Colors getNextColor();
+	Colors getNextColor(Graph<Hexagon>);
 
 private:
 

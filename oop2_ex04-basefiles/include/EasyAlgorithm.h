@@ -5,7 +5,7 @@
 class EasyAlgorithm : public Algorithm
 {
 public:
-	Colors getNextColor();
+	Colors getNextColor(Graph<Hexagon>);
 
 private:
 

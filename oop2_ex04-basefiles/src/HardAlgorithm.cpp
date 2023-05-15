@@ -2,7 +2,7 @@
 
 #include "HardAlgorithm.h"
 
-Colors HardAlgorithm::getNextColor()
+Colors HardAlgorithm::getNextColor(Graph<Hexagon> graph)
 {
     return Blue;
 }
