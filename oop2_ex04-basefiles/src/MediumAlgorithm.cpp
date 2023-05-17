@@ -10,14 +10,14 @@ Colors MediumAlgorithm::getNextColor(Graph<Hexagon> graph, std::vector<Hexagon> 
     Colors best_color;
     for (int color = Cyan; color <= Orange; color++)
     {
-        sf::Color my_color = Resources::instance().getColorArray()[color];
+        sf::Color check_color = Resources::instance().getColorArray()[color];
       
-        if (my_color == board[COMPUTER_INDEX].getColor() || my_color == board[PLAYER_INDEX].getColor())
+        if (check_color == board[COMPUTER_INDEX].getColor() || check_color == board[PLAYER_INDEX].getColor())
         {
             continue;
         }
 
-        int new_size = graph.BFS_Medium(board[COMPUTER_INDEX].getColor(), my_color) + curr_size;
+        int new_size = graph.BFS_Medium(board[COMPUTER_INDEX].getColor(), check_color) + curr_size;
 
         if (new_size > sum)
         {
