@@ -10,6 +10,7 @@ Game::Game()
     m_algorithm(std::make_unique<EasyAlgorithm>())
 {
     m_window.setFramerateLimit(60);
+    m_YouWin.setTexture(Resources::instance().getTexture(YouWin));
 }
 
 void Game::run()
@@ -199,7 +200,24 @@ void Game::computerTurn(Colors color)
 void Game::winLoop()
 {
     m_game_over = true;
-    //TODO אנימציה
+    bool click = false;
+
+    while (!click)
+    {
+        m_window.draw(m_YouWin);
+        m_window.display();
+
+        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        {
+            switch (event.type)
+            {
+            case sf::Event::MouseButtonReleased:
+            {
+                click = true;
+            }
+            }
+        }
+    }
 }
 
 void Game::loseLoop()
