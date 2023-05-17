@@ -7,8 +7,6 @@ Board::Board(int row, int col)
 {
 	m_backgroung.setTexture(Resources::instance().getTexture(GameBackground));
 	m_backgroung.scale(2.6f, 2.6f);
-	createBoard();
-	connectNeighbors();
 	createRectangles();
 	createGridFrame();
 	locateObjects();
@@ -25,8 +23,8 @@ void Board::createBoard()
 	}
 	if(m_hexagons[m_col - 1].getColor() == m_hexagons[m_row * m_col - m_col].getColor())
 	{
-		m_hexagons[m_col - 1].get().setFillColor(Resources::instance().getColorArray()[Cyan]);
-		m_hexagons[m_row * m_col - m_col].get().setFillColor(Resources::instance().getColorArray()[Blue]);
+		m_hexagons[COMPUTER_INDEX].get().setFillColor(Resources::instance().getColorArray()[Cyan]);
+		m_hexagons[PLAYER_INDEX].get().setFillColor(Resources::instance().getColorArray()[Blue]);
 	}
 }
 
@@ -70,11 +68,11 @@ void Board::connectHexagonNeighbors(int dir[6][2], int row, int col, Hexagon& he
 		if (newRow >= 0 && newRow < m_row && newCol >= 0 && newCol < m_col) 
 		{
 			int neighborIndex = newRow * m_col + newCol;
-			if(hexagon.getColor() == m_hexagons[neighborIndex].getColor())
-			{
-				//hexagon.addNeighbor(&m_hexagons[neighborIndex]);// TODO מיותר
-				m_graph.addNeighbor(hexagon.getIndex(), &m_hexagons[neighborIndex]);
-			}
+			m_graph.addNeighbor(hexagon.getIndex(), &m_hexagons[neighborIndex]);
+			//if(hexagon.getColor() == m_hexagons[neighborIndex].getColor())
+			//{
+			//	m_graph.addNeighbor(hexagon.getIndex(), &m_hexagons[neighborIndex]);
+			//}
 		}
 	}
 }
@@ -85,8 +83,6 @@ void Board::locateObjects()
 	m_back.scale(sf::Vector2f(WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width,
 		WINDOW_WIDTH * 0.12 / m_back.getTextureRect().width));
 	m_back.setPosition(sf::Vector2f(WINDOW_WIDTH * 0.85, WINDOW_HEIGHT * 0.88));
-	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col-1].getColor())].getPosition());
-	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
 }
 
 void Board::createGridFrame()
@@ -201,21 +197,21 @@ void Board::backRelease()
 
 Colors Board::getComputerColor()
 {
-	return color2Enum(m_hexagons[m_col - 1].getColor());
+	return color2Enum(m_hexagons[COMPUTER_INDEX].getColor());
 }
 
 Colors Board::getPlayerColor()
 {
-	return color2Enum(m_hexagons[m_row * m_col - m_col].getColor());
+	return color2Enum(m_hexagons[PLAYER_INDEX].getColor());
 }
 
 void Board::playTurn(bool player_turn, Colors color)
 {
 	std::vector<bool> index_to_paint;
 	if (player_turn)
-		index_to_paint = m_graph.BFS(m_row * m_col - m_col);
+		index_to_paint = m_graph.BFS(PLAYER_INDEX, m_hexagons[PLAYER_INDEX].getColor());
 	else
-		index_to_paint = m_graph.BFS(m_col - 1);
+		index_to_paint = m_graph.BFS(COMPUTER_INDEX, m_hexagons[COMPUTER_INDEX].getColor());
 
 	for (int index = 0; index < m_hexagons.size(); index++)
 	{
@@ -224,8 +220,6 @@ void Board::playTurn(bool player_turn, Colors color)
 			m_hexagons[index].setColor(color);
 		}
 	}
-	m_graph.clear();
-	connectNeighbors();
 }
 
 void Board::init()
@@ -234,8 +228,8 @@ void Board::init()
 	m_graph.clear();
 	createBoard();
 	connectNeighbors();
-	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_col - 1].getColor())].getPosition());
-	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[m_row * m_col - m_col].getColor())].getPosition());
+	m_ComputerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[COMPUTER_INDEX].getColor())].getPosition());
+	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[PLAYER_INDEX].getColor())].getPosition());
 }
 
 int Board::size()
@@ -245,14 +239,14 @@ int Board::size()
 
 int Board::playerArea()
 {
-	std::vector<bool> currTree = m_graph.BFS(m_row * m_col - m_col);
+	std::vector<bool> currTree = m_graph.BFS(PLAYER_INDEX, m_hexagons[PLAYER_INDEX].getColor());
 	int counter = countArea(currTree);
 	return counter;
 }
 
 int Board::computerArea()
 {
-	std::vector<bool> currTree = m_graph.BFS(m_col - 1);
+	std::vector<bool> currTree = m_graph.BFS(COMPUTER_INDEX, m_hexagons[COMPUTER_INDEX].getColor());
 	int counter = countArea(currTree);
 	return counter;
 }
@@ -273,4 +267,9 @@ int Board::countArea(std::vector<bool> vec)
 Graph<Hexagon> Board::getGraph()
 {
 	return m_graph;
+}
+
+std::vector<Hexagon> Board::getBoard()
+{
+	return m_hexagons;
 }

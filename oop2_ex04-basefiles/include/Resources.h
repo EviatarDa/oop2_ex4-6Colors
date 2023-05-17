@@ -24,13 +24,6 @@ enum Textures
     GameBackground,
 };
 
-enum Owner
-{
-    Player,
-    Computer,
-    None,
-};
-
 enum Button
 {
     Easy,
@@ -55,6 +48,9 @@ const float GRID_HEGHT = ROW * (HEX_HEIGHT * 3.f / 4.f);
 
 const int TEXTURES = 5;
 const int BUTTONS = 3;
+
+const int PLAYER_INDEX = ROW * COL - COL;
+const int COMPUTER_INDEX = COL - 1;
 
 const sf::Color WINDOW_COLOR = sf::Color::Black;
 

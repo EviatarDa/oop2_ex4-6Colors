@@ -1,13 +1,12 @@
 #include "EasyAlgorithm.h"
 #pragma once
 
-Colors EasyAlgorithm::getNextColor(Graph<Hexagon> graph)
+Colors EasyAlgorithm::getNextColor(Graph<Hexagon> graph, std::vector<Hexagon> board, int curr_size)
 {
-	std::random_device rd;                       // Obtain a random seed from the hardware
-	std::mt19937 generator(rd());                 // Initialize the random number generator
-	std::uniform_int_distribution<int> distribution(0, 5);  // Define the range of the random numbers
-
-	int randomNumber = distribution(generator);  // Generate a random number
+	std::random_device rd;                      
+	std::mt19937 generator(rd());             
+	std::uniform_int_distribution<int> distribution(0, 5);  
+	int randomNumber = distribution(generator);  
 
 	return (Colors)randomNumber;
 }

@@ -63,6 +63,11 @@ void Game::playerTurn(sf::Vector2f locaion)
 				m_board.playTurn(m_player_turn, (Colors)color);
 				m_player_turn = false;
 			}
+
+            if (m_board.playerArea() > m_board.size() / 2)
+            {
+                winLoop();
+            }
 		}
 	}
     if (m_board.getBackButton().getGlobalBounds().contains(locaion))
@@ -70,10 +75,7 @@ void Game::playerTurn(sf::Vector2f locaion)
         m_game_over = true;
     }
 
-    if (m_board.playerArea() > m_board.size()/2)
-    {
-        winLoop();
-    }
+
 }
 
 void Game::handleMenuClick(sf::Vector2f location)
@@ -144,7 +146,7 @@ void Game::startGame()
                 if (m_player_turn)
                 {
                     playerTurn(location);
-                    computerTurn(m_algorithm->getNextColor(m_board.getGraph()));
+                    computerTurn(m_algorithm->getNextColor(m_board.getGraph(), m_board.getBoard(), m_board.computerArea()));
                 }
                 break;
             }
@@ -181,7 +183,7 @@ void Game::computerTurn(Colors color)
     {
         while ((color == m_board.getPlayerColor() || color == m_board.getComputerColor()))
         {
-            color = m_algorithm->getNextColor(m_board.getGraph());
+            color = m_algorithm->getNextColor(m_board.getGraph(), m_board.getBoard(), m_board.computerArea());
         }
         m_board.setComputerX(color);
         m_board.playTurn(m_player_turn, color);

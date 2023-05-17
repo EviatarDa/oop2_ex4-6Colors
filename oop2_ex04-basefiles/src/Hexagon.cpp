@@ -4,7 +4,7 @@
 
 
 Hexagon::Hexagon(int row, int col)
-	:m_row(row), m_col(col), m_hexagon(RADIUS, 6), m_owner(None)
+	:m_row(row), m_col(col), m_hexagon(RADIUS, 6)
 {
 	std::random_device rd;                       // Obtain a random seed from the hardware
 	std::mt19937 generator(rd());                 // Initialize the random number generator
@@ -26,10 +26,7 @@ sf::CircleShape& Hexagon::get()
 	return m_hexagon;
 }
 
-void Hexagon::setOwner(Owner owner)
-{
-	m_owner = owner;
-}
+
 
 int Hexagon::getRow()
 {
@@ -41,20 +38,15 @@ int Hexagon::getCol()
 	return m_col;
 }
 
-void Hexagon::addNeighbor(Hexagon* hexagon)
-{
-	m_neighbors.push_back(hexagon);
-}
+
+
 
 sf::Color Hexagon::getColor()
 {
 	return m_hexagon.getFillColor();
 }
 
-std::vector<Hexagon*> Hexagon::getNeighbors()
-{
-	return m_neighbors;
-}
+
 
 sf::Vector2f Hexagon::getPosition()
 {

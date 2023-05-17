@@ -9,14 +9,15 @@ class Graph
 {
 public:
 	Graph(int);
-	std::vector<bool> BFS(int);
+	std::vector<bool> BFS(int, sf::Color);
+   
+    int BFS_Medium(sf::Color, sf::Color);
     void addNeighbor(int, Shape*);
     void clear();
 
 private:
 	int m_size;
     std::vector<std::vector<Shape*>> m_neighbors;
-
 };
 
 template<class Shape>
@@ -27,37 +28,70 @@ inline Graph<Shape>::Graph(int size)
 }
 
 template<class Shape>
-inline std::vector<bool> Graph<Shape>::BFS(int start_node) {
-    // Initialize the visited array and the queue
+inline std::vector<bool> Graph<Shape>::BFS(int start_node, sf::Color color )
+{
     std::vector<bool> visited(m_size, false);
     std::queue<int> q;
 
-    // Mark the starting node as visited and enqueue it
     visited[start_node] = true;
     q.push(start_node);
 
-    // Perform BFS
-    while (!q.empty()) {
-        // Dequeue a vertex from the queue and print it
+    while (!q.empty())
+    {
         int node = q.front();
-        
         q.pop();
 
-        // Get the neighbors of the dequeued vertex
         std::vector<Shape*> neighbors = m_neighbors[node];
       
-
-        // For each neighbor, if it hasn't been visited yet, mark it as visited
-        // and enqueue it
-        for (int i = 0; i < neighbors.size(); i++) {
-            int neighbor_node = neighbors[i]->getIndex();  // assuming the Shape class has a method called get_id() that returns the node ID
-            if (!visited[neighbor_node]) {
+        for (int i = 0; i < neighbors.size(); i++) 
+        {
+            int neighbor_node = neighbors[i]->getIndex();
+            if ((!visited[neighbor_node])&& (neighbors[i]->getColor() == color))
+            {
                 visited[neighbor_node] = true;
                 q.push(neighbor_node);
             }
         }
     }
     return visited;
+}
+
+
+
+template<class Shape>
+inline int Graph<Shape>::BFS_Medium(sf::Color my_color, sf::Color desired_color)
+{
+    int start_node = COMPUTER_INDEX;
+    int counter = 0;
+    std::vector<bool> visited(m_size, false);
+    std::queue<int> q;
+
+    visited[start_node] = true;
+    q.push(start_node);
+
+    while (!q.empty())
+    {
+        int node = q.front();
+        q.pop();
+
+        std::vector<Shape*> neighbors = m_neighbors[node];
+
+        for (int i = 0; i < neighbors.size(); i++)
+        {
+            int neighbor_node = neighbors[i]->getIndex();
+            if ((!visited[neighbor_node]) && (neighbors[i]->getColor() == my_color))
+            {
+                visited[neighbor_node] = true;
+                q.push(neighbor_node);
+            }
+            else if ((!visited[neighbor_node]) && (neighbors[i]->getColor() == desired_color))
+            {
+                visited[neighbor_node] = true;
+                counter++;
+            }
+        }
+    }
+    return counter;
 }
 
 template<class Shape>
@@ -77,14 +111,4 @@ inline void Graph<Shape>::clear()
     m_neighbors.resize(m_size);
 }
 
-//template<class Shape>
-//inline void Graph<Shape>::rePaint(int node_index, Colors color)
-//{
-//    std::vector<bool> shapes_to_paint = BFS(node_index);
-//    for (int index = 0; index < shapes_to_paint.size(); index++)
-//    {
-//        if(shapes_to_paint[index] == true)
-//            hexagons[index]->setColor(color);
-//    }
-//}
 
