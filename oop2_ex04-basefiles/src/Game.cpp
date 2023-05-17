@@ -11,6 +11,7 @@ Game::Game()
 {
     m_window.setFramerateLimit(60);
     m_YouWin.setTexture(Resources::instance().getTexture(YouWin));
+    m_YouWin.setTexture(Resources::instance().getTexture(YouLose));
 }
 
 void Game::run()

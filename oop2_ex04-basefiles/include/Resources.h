@@ -22,7 +22,8 @@ enum Textures
     Back,
     Six_colors,
     GameBackground,
-    YouWin
+    YouWin,
+    YouLose
 };
 
 enum Button
@@ -47,7 +48,7 @@ const float HEX_EDGH = 2 * RADIUS * sin(3.14159 / 3);
 const float GRID_WIDTH = HEX_WIDTH * COL;
 const float GRID_HEGHT = ROW * (HEX_HEIGHT * 3.f / 4.f);
 
-const int TEXTURES = 6;
+const int TEXTURES = 7;
 const int BUTTONS = 3;
 
 const int PLAYER_INDEX = ROW * COL - COL;

@@ -27,6 +27,7 @@ private:
 	bool m_player_turn;
 	std::unique_ptr<Algorithm> m_algorithm;
 	sf::Sprite m_YouWin;
+	sf::Sprite m_YouLose;
 
 	void startGame();
 	void init();
