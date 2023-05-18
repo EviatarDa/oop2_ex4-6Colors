@@ -16,10 +16,7 @@ class Game
 public:
 	Game();
 	void run();
-	void playerTurn(sf::Vector2f);
-	void handleMenuClick(sf::Vector2f);
-	void handleMenuMouseMoved(sf::Vector2f);
-	void handleGameMouseMoved(sf::Vector2f);
+
 
 private:
 	sf::RenderWindow m_window;
@@ -33,9 +30,15 @@ private:
 	sf::Sprite m_YouLose;
 	sf::Text m_score[2];
 
+	//functions
+	void playerTurn(sf::Vector2f);
+	void handleMenuClick(sf::Vector2f);
+	void handleMenuMouseMoved(sf::Vector2f);
+	void handleGameMouseMoved(sf::Vector2f);
 	void startGame();
 	void init();
 	void computerTurn(Colors);
 	void winLoop();
 	void loseLoop();
+	void locateObjects();
 };

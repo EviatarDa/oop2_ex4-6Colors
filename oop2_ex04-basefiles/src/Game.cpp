@@ -12,21 +12,7 @@ Game::Game()
     m_window.setFramerateLimit(60);
     m_YouWin.setTexture(Resources::instance().getTexture(YouWin));
     m_YouLose.setTexture(Resources::instance().getTexture(YouLose));
-
-    for(int index = Player ; index <= Computer ; index++)
-    {
-        m_score[index].setFont(Resources::instance().getFont());
-        m_score[index].setCharacterSize(30);
-        m_score[index].setOutlineThickness(2);
-        m_score[index].setOutlineColor(sf::Color::Red);
-    }
-    int number = 0;
-    m_score[Player].setString("Player:\n" + std::to_string(number) + "%");
-    m_score[Computer].setString("Computer:\n" + std::to_string(number) + "%");
-
-    m_score[Player].setPosition(WINDOW_WIDTH * 0.05, WINDOW_HEIGHT * 0.88);
-    m_score[Computer].setPosition(WINDOW_WIDTH * 0.15, WINDOW_HEIGHT * 0.88);
-
+    locateObjects();
 }
 
 void Game::run()
@@ -290,4 +276,36 @@ void Game::loseLoop()
 
         }
     }
+}
+
+void Game::locateObjects()
+{
+    for (int index = Player; index <= Computer; index++)
+    {
+        m_score[index].setFont(Resources::instance().getFont());
+        m_score[index].setCharacterSize(30);
+        m_score[index].setOutlineThickness(2);
+        m_score[index].setOutlineColor(sf::Color::Red);
+    }
+    int number = 0;
+    m_score[Player].setString("Player:\n" + std::to_string(number) + "%");
+    m_score[Computer].setString("Computer:\n" + std::to_string(number) + "%");
+
+    m_score[Player].setPosition(WINDOW_WIDTH * 0.05, WINDOW_HEIGHT * 0.88);
+    m_score[Computer].setPosition(WINDOW_WIDTH * 0.15, WINDOW_HEIGHT * 0.88);
+
+
+    sf::FloatRect win_bounds = m_YouWin.getLocalBounds();
+    float win_centerX = win_bounds.left + win_bounds.width / 2.0f;
+    float win_centerY = win_bounds.top + win_bounds.height / 2.0f;
+    m_YouWin.setOrigin(win_centerX, win_centerY);
+
+    sf::FloatRect lose_bounds = m_YouLose.getLocalBounds();
+    float lose_centerX = lose_bounds.left + lose_bounds.width / 2.0f;
+    float lose_centerY = lose_bounds.top + lose_bounds.height / 2.0f;
+    m_YouLose.setOrigin(lose_centerX, lose_centerY);
+
+    m_YouWin.setPosition(WINDOW_WIDTH * 0.5, WINDOW_HEIGHT * 0.5);
+    m_YouLose.setPosition(WINDOW_WIDTH * 0.5, WINDOW_HEIGHT * 0.5);
+
 }

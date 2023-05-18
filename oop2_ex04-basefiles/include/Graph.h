@@ -105,6 +105,7 @@ inline int Graph<Shape>::BFS_Hard(sf::Color my_color, sf::Color desired_color)
 
     visited[start_node] = true;
     q.push(start_node);
+    q2.push(start_node);
 
     while (!q.empty())
     {
