@@ -236,6 +236,13 @@ const int Board::size()const
 const int Board::playerArea()
 {
 	std::vector<bool> currTree = m_graph.BFS(PLAYER_INDEX, m_hexagons[PLAYER_INDEX].getColor());
+	for (int index = 0; index < m_hexagons.size(); index++)
+	{
+		if (currTree[index])
+		{
+			m_hexagons[index].get().setOutlineColor(sf::Color::Color(189, 181, 213));//Wisteria
+		}
+	}
 	int counter = countArea(currTree);
 	return counter;
 }
@@ -243,6 +250,15 @@ const int Board::playerArea()
 const int Board::computerArea()
 {
 	std::vector<bool> currTree = m_graph.BFS(COMPUTER_INDEX, m_hexagons[COMPUTER_INDEX].getColor());
+
+	for (int index = 0; index < m_hexagons.size(); index++)
+	{
+		if (currTree[index])
+		{
+			m_hexagons[index].get().setOutlineColor(sf::Color::Color(127, 0, 255)); //Violet
+		}
+	}
+
 	int counter = countArea(currTree);
 	return counter;
 }
