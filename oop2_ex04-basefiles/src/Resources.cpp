@@ -28,6 +28,11 @@ sf::Texture& Resources::getButton(Button button)
 	return m_Buttons[button];
 }
 
+sf::Font& Resources::getFont()
+{
+	return m_font;
+}
+
 void Resources::LoadFromFile()
 {
 	m_textures[X_texture].loadFromFile("X.png");
@@ -43,4 +48,6 @@ void Resources::LoadFromFile()
 	m_Buttons[Easy].loadFromFile("Easy.png");
 	m_Buttons[Medium].loadFromFile("Medium.png");
 	m_Buttons[Hard].loadFromFile("Hard.png");
+
+	m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
 }

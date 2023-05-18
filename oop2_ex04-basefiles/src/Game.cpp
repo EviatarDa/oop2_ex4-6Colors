@@ -11,7 +11,22 @@ Game::Game()
 {
     m_window.setFramerateLimit(60);
     m_YouWin.setTexture(Resources::instance().getTexture(YouWin));
-    m_YouWin.setTexture(Resources::instance().getTexture(YouLose));
+    m_YouLose.setTexture(Resources::instance().getTexture(YouLose));
+
+    for(int index = Player ; index <= Computer ; index++)
+    {
+        m_score[index].setFont(Resources::instance().getFont());
+        m_score[index].setCharacterSize(30);
+        m_score[index].setOutlineThickness(2);
+        m_score[index].setOutlineColor(sf::Color::Red);
+    }
+    int number = 0;
+    m_score[Player].setString("Player:\n" + std::to_string(number) + "%");
+    m_score[Computer].setString("Computer:\n" + std::to_string(number) + "%");
+
+    m_score[Player].setPosition(WINDOW_WIDTH * 0.05, WINDOW_HEIGHT * 0.88);
+    m_score[Computer].setPosition(WINDOW_WIDTH * 0.15, WINDOW_HEIGHT * 0.88);
+
 }
 
 void Game::run()
@@ -65,6 +80,11 @@ void Game::playerTurn(sf::Vector2f locaion)
 				m_board.playTurn(m_player_turn, (Colors)color);
 				m_player_turn = false;
 			}
+
+            double playerPercentage = (m_board.playerArea() / (double)(ROW * COL)) * 100;
+            std::stringstream ss;
+            ss << "Player:\n" << std::fixed << std::setprecision(2) << playerPercentage << "%";
+            m_score[Player].setString(ss.str());
 
             if (m_board.playerArea() > m_board.size() / 2)
             {
@@ -134,6 +154,8 @@ void Game::startGame()
     {
         m_window.clear(WINDOW_COLOR);
         m_board.drawBoard(this->m_window);
+        m_window.draw(m_score[0]);
+        m_window.draw(m_score[1]);
         m_window.display();
 
         if (auto event = sf::Event{}; m_window.waitEvent(event) )
@@ -176,6 +198,9 @@ void Game::init()
 {
     m_game_over = false;
     m_player_turn = true;
+    int number = 0;
+    m_score[Player].setString("Player:\n" + std::to_string(number) + "%");
+    m_score[Computer].setString("Computer:\n" + std::to_string(number) + "%");
     m_board.init();
 }
 
@@ -191,6 +216,11 @@ void Game::computerTurn(Colors color)
         m_board.playTurn(m_player_turn, color);
         m_player_turn = true;
 
+        double computer_percentage = (m_board.computerArea() / (double)(ROW * COL)) * 100;
+        std::stringstream ss;
+        ss << "Computer:\n" << std::fixed << std::setprecision(2) << computer_percentage << "%";
+        m_score[Computer].setString(ss.str());
+
         if (m_board.computerArea() > m_board.size() / 2)
         {
             loseLoop();
@@ -205,6 +235,10 @@ void Game::winLoop()
 
     while (!click)
     {
+        m_window.clear(WINDOW_COLOR);
+        m_board.drawBoard(this->m_window);
+        m_window.draw(m_score[0]);
+        m_window.draw(m_score[1]);
         m_window.draw(m_YouWin);
         m_window.display();
 
@@ -215,8 +249,13 @@ void Game::winLoop()
             case sf::Event::MouseButtonReleased:
             {
                 click = true;
+                break;
             }
+            case sf::Event::Closed:
+                m_window.close();
+                break;
             }
+            
         }
     }
 }
@@ -224,5 +263,31 @@ void Game::winLoop()
 void Game::loseLoop()
 {
     m_game_over = true;
-    //TODO אנימציה
+    bool click = false;
+
+    while (!click)
+    {
+        m_window.clear(WINDOW_COLOR);
+        m_board.drawBoard(this->m_window);
+        m_window.draw(m_score[Player]);
+        m_window.draw(m_score[Computer]);
+        m_window.draw(m_YouLose);
+        m_window.display();
+
+        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        {
+            switch (event.type)
+            {
+            case sf::Event::MouseButtonReleased:
+            {
+                click = true;
+                break;
+            }
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            }
+
+        }
+    }
 }

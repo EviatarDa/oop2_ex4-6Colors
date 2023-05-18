@@ -33,6 +33,12 @@ enum Button
     Hard,
 };
 
+enum Score
+{
+    Player,
+    Computer,
+};
+
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 
@@ -67,6 +73,7 @@ public:
     sf::Color* getColorArray();
     sf::Texture& getTexture(Textures);
     sf::Texture& getButton(Button);
+    sf::Font& getFont();
 
 
 private:
@@ -75,6 +82,8 @@ private:
 
     sf::Texture m_textures[TEXTURES];
     sf::Texture m_Buttons[BUTTONS];
+
+    sf::Font m_font;
 
     void LoadFromFile();
 

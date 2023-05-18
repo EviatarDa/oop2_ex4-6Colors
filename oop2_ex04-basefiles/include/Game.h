@@ -6,6 +6,9 @@
 #include "Resources.h"
 #include "Board.h"
 #include "Menu.h"
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 
 class Game
@@ -28,6 +31,7 @@ private:
 	std::unique_ptr<Algorithm> m_algorithm;
 	sf::Sprite m_YouWin;
 	sf::Sprite m_YouLose;
+	sf::Text m_score[2];
 
 	void startGame();
 	void init();
