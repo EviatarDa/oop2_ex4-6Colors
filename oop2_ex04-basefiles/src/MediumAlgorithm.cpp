@@ -4,7 +4,7 @@
 
 
 
-Colors MediumAlgorithm::getNextColor(Graph<Hexagon> graph, std::vector<Hexagon> board, int curr_size)
+Colors MediumAlgorithm::getNextColor( Graph<Hexagon> graph, std::vector<Hexagon> board, const int curr_size)
 {
     int sum = 0;
     Colors best_color;

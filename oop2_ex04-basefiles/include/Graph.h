@@ -3,16 +3,18 @@
 #include <queue>
 #include<iostream>
 #include <SFML/Graphics.hpp>
+#include "Resources.h"
+
 
 template <class Shape>
 class Graph
 {
 public:
-	Graph(int);
-	std::vector<bool> BFS(int, sf::Color);
-    int BFS_Medium(sf::Color, sf::Color);
-    int BFS_Hard(sf::Color, sf::Color);
-    void addNeighbor(int, Shape*);
+	Graph(const int);
+    const std::vector<bool> BFS(const int, const sf::Color)const;
+    const int BFS_Medium(const sf::Color, const sf::Color)const;
+    const int BFS_Hard(const sf::Color, const sf::Color)const;
+    void addNeighbor(const int, Shape*);
     void clear();
 
 private:
@@ -21,14 +23,14 @@ private:
 };
 
 template<class Shape>
-inline Graph<Shape>::Graph(int size)
+inline Graph<Shape>::Graph(const int size)
 	:m_size(size)
 {
     m_neighbors.resize(m_size);
 }
 
 template<class Shape>
-inline std::vector<bool> Graph<Shape>::BFS(int start_node, sf::Color color )
+inline const std::vector<bool> Graph<Shape>::BFS(const int start_node, const sf::Color color )const
 {
     std::vector<bool> visited(m_size, false);
     std::queue<int> q;
@@ -59,7 +61,7 @@ inline std::vector<bool> Graph<Shape>::BFS(int start_node, sf::Color color )
 
 
 template<class Shape>
-inline int Graph<Shape>::BFS_Medium(sf::Color my_color, sf::Color desired_color)
+inline const int Graph<Shape>::BFS_Medium(const sf::Color my_color, const sf::Color desired_color)const
 {
     int start_node = COMPUTER_INDEX;
     int counter = 0;
@@ -95,7 +97,7 @@ inline int Graph<Shape>::BFS_Medium(sf::Color my_color, sf::Color desired_color)
 }
 
 template<class Shape>
-inline int Graph<Shape>::BFS_Hard(sf::Color my_color, sf::Color desired_color)
+inline const int Graph<Shape>::BFS_Hard(const sf::Color my_color, const sf::Color desired_color)const
 {
     int start_node = COMPUTER_INDEX;
     int counter = 0;
@@ -149,7 +151,7 @@ inline int Graph<Shape>::BFS_Hard(sf::Color my_color, sf::Color desired_color)
 }
 
 template<class Shape>
-inline void Graph<Shape>::addNeighbor(int index, Shape* shape)
+inline void Graph<Shape>::addNeighbor(const int index, Shape* shape)
 {
     m_neighbors[index].push_back(shape);
 }

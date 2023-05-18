@@ -1,7 +1,7 @@
 #include "EasyAlgorithm.h"
 #pragma once
 
-Colors EasyAlgorithm::getNextColor(Graph<Hexagon> graph, std::vector<Hexagon> board, int curr_size)
+Colors EasyAlgorithm::getNextColor( Graph<Hexagon> graph,  std::vector<Hexagon> board, const  int curr_size) 
 {
 	std::random_device rd;                      
 	std::mt19937 generator(rd());             

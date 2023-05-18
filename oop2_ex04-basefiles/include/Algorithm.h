@@ -8,7 +8,7 @@
 class Algorithm
 {
 public:
-	virtual Colors getNextColor(Graph<Hexagon>, std::vector<Hexagon>, int curr_size) = 0;
+	virtual Colors getNextColor(Graph<Hexagon>, std::vector<Hexagon>, const int curr_size) = 0;
 
 private:	
 };

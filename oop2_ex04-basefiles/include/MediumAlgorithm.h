@@ -5,7 +5,7 @@
 class MediumAlgorithm :public Algorithm
 {
 public:
-	Colors getNextColor(Graph<Hexagon>, std::vector<Hexagon>, int curr_size);
+	Colors getNextColor( Graph<Hexagon>,  std::vector<Hexagon>, const int curr_size);
 
 private:
 

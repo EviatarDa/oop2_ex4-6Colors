@@ -9,7 +9,7 @@ class Menu
 public:
 	Menu();
 	sf::Sprite getButton(const Button) const;
-	void drawMenu(sf::RenderWindow&);
+	void drawMenu(sf::RenderWindow&)const;
 	void ButtonPress(const Button);
 	void ButtonRelease(const Button);
 

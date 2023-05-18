@@ -54,7 +54,7 @@ void Game::run()
     }
 }
 
-void Game::playerTurn(sf::Vector2f locaion)
+void Game::playerTurn(const sf::Vector2f locaion)
 {
 	for (int color = Cyan; color <= Orange; color++)
 	{
@@ -86,7 +86,7 @@ void Game::playerTurn(sf::Vector2f locaion)
 
 }
 
-void Game::handleMenuClick(sf::Vector2f location)
+void Game::handleMenuClick(const sf::Vector2f location)
 {
     if (m_menu.getButton(Easy).getGlobalBounds().contains(location))
     {
@@ -106,7 +106,7 @@ void Game::handleMenuClick(sf::Vector2f location)
 
 }
 
-void Game::handleMenuMouseMoved(sf::Vector2f location)
+void Game::handleMenuMouseMoved(const sf::Vector2f location)
 {
     for (int button = Easy; button <= Hard; button++)
     {
@@ -121,7 +121,7 @@ void Game::handleMenuMouseMoved(sf::Vector2f location)
     }
 }
 
-void Game::handleGameMouseMoved(sf::Vector2f location)
+void Game::handleGameMouseMoved(const sf::Vector2f location)
 {
     if (m_board.getBackButton().getGlobalBounds().contains(location))
     {
@@ -131,6 +131,20 @@ void Game::handleGameMouseMoved(sf::Vector2f location)
     {
         m_board.backRelease();
     }
+
+    for (int rectangle = Cyan; rectangle <= Orange; rectangle++)
+    {
+        if ((m_board.getRectangle((Colors)rectangle).getGlobalBounds().contains(location)))
+        {
+            m_board.rectanglePress((Colors)rectangle);
+        }
+        else
+        {
+            m_board.rectangleRelease((Colors)rectangle);
+        }
+    }
+
+
 }
 
 void Game::startGame()

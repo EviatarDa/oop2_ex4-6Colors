@@ -6,8 +6,8 @@
 class X
 {
 public:
-	X(sf::Vector2f);
-	sf::Sprite get();
+	X(const sf::Vector2f);
+	const sf::Sprite get()const;
 
 
 private:

@@ -39,27 +39,32 @@ enum Score
     Computer,
 };
 
+//window
 const int WINDOW_HEIGHT = 800;
 const int WINDOW_WIDTH = 1400;
 
-const int ROW = 25; //גובה (מספר שורה)
-const int COL = 20; //רוחב מספר עמודה
+//hexagons
+const int ROW = 26; //גובה 
+const int COL = 50; //רוחב
 const int RADIUS = 15;
 const int OUTLINE = 1;
-
 const float HEX_WIDTH = RADIUS * std::sqrt(3.f) + (2*OUTLINE);
 const float HEX_HEIGHT = 2.f * RADIUS + (2 * OUTLINE);
 const float HEX_EDGH = 2 * RADIUS * sin(3.14159 / 3);
 
+//grid
 const float GRID_WIDTH = HEX_WIDTH * COL;
 const float GRID_HEGHT = ROW * (HEX_HEIGHT * 3.f / 4.f);
 
+//enums
 const int TEXTURES = 7;
 const int BUTTONS = 3;
 
+//const locations
 const int PLAYER_INDEX = ROW * COL - COL;
 const int COMPUTER_INDEX = COL - 1;
 
+//backgraound
 const sf::Color WINDOW_COLOR = sf::Color::Black;
 
 
@@ -70,10 +75,10 @@ public:
     ~Resources() = default;
     static Resources& instance();
 
-    sf::Color* getColorArray();
-    sf::Texture& getTexture(Textures);
-    sf::Texture& getButton(Button);
-    sf::Font& getFont();
+    const sf::Color* getColorArray()const;
+    const sf::Texture& getTexture(const Textures)const;
+    const sf::Texture& getButton(const Button)const;
+    const sf::Font& getFont()const;
 
 
 private:

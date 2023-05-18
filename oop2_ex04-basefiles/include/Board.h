@@ -8,24 +8,26 @@
 class Board
 {
 public:
-	Board(int, int);
+	Board(const int, const int);
 	void drawBoard(sf::RenderWindow&);
-	void setPlayerX(Colors);
-	void setComputerX(Colors);
-	sf::RectangleShape getRectangle(Colors);
-	sf::Sprite getBackButton();
+	void setPlayerX(const Colors);
+	void setComputerX(const Colors);
+	const sf::RectangleShape getRectangle(const Colors) const;
+	const sf::Sprite getBackButton()const;
 	void backPress();
 	void backRelease();
-	Colors getComputerColor();
-	Colors getPlayerColor();
-	void playTurn(bool, Colors);
+	const Colors getComputerColor();
+	const Colors getPlayerColor();
+	void playTurn(const bool, const Colors);
 	void init();
-	int size();
-	int playerArea();
-	int computerArea();
-	int countArea(std::vector<bool>);
-	Graph<Hexagon> getGraph();
-	std::vector<Hexagon> getBoard();
+	const int size()const;
+	const int playerArea();
+	const int computerArea();
+	const int countArea(std::vector<bool>)const;
+	const Graph<Hexagon> getGraph()const;
+	const std::vector<Hexagon> getBoard()const;
+	void rectanglePress(Colors);
+	void rectangleRelease(Colors);
 
 private:
 	int m_row;
@@ -39,14 +41,13 @@ private:
 	Graph<Hexagon> m_graph;
 	sf::Sprite m_backgroung;
 
-
-
+	//functions
 	void createBoard();
 	void createRectangles();
 	void connectNeighbors();
-	void connectHexagonNeighbors(int directions[6][2], int, int, Hexagon&);
+	void connectHexagonNeighbors(const int directions[6][2], const int, const int, Hexagon&);
 	void locateObjects();
 	void createGridFrame();
-	sf::RectangleShape createRectangle(const int) const;
-	Colors color2Enum(sf::Color);
+	const sf::RectangleShape createRectangle(const int) const;
+	const Colors color2Enum(const sf::Color);
 };

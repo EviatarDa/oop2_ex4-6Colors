@@ -22,7 +22,7 @@ sf::Sprite Menu::getButton(const Button button) const
 	return m_buttons[button];
 }
 
-void Menu::drawMenu(sf::RenderWindow& window)
+void Menu::drawMenu(sf::RenderWindow& window)const
 {
 	window.draw(m_backgroung);
 	for (int button = Easy; button <= Hard; button++)

@@ -2,7 +2,7 @@
 
 #include "Board.h"
 
-Board::Board(int row, int col)
+Board::Board(const int row, const int col)
 	:m_row(row), m_col(col), m_graph(row* col)
 {
 	m_backgroung.setTexture(Resources::instance().getTexture(GameBackground));
@@ -58,7 +58,7 @@ void Board::connectNeighbors()
 	}
 }
 
-void Board::connectHexagonNeighbors(int dir[6][2], int row, int col, Hexagon& hexagon)
+void Board::connectHexagonNeighbors(const int dir[6][2], const int row, const int col, Hexagon& hexagon)
 {
 	for (int index = 0 ; index < 6 ; index++)
 	{
@@ -69,10 +69,6 @@ void Board::connectHexagonNeighbors(int dir[6][2], int row, int col, Hexagon& he
 		{
 			int neighborIndex = newRow * m_col + newCol;
 			m_graph.addNeighbor(hexagon.getIndex(), &m_hexagons[neighborIndex]);
-			//if(hexagon.getColor() == m_hexagons[neighborIndex].getColor())
-			//{
-			//	m_graph.addNeighbor(hexagon.getIndex(), &m_hexagons[neighborIndex]);
-			//}
 		}
 	}
 }
@@ -100,7 +96,7 @@ void Board::createGridFrame()
 	//right
 	m_grid_frame[2].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS - 4 * OUTLINE));
 	m_grid_frame[2].setFillColor(WINDOW_COLOR);
-	m_grid_frame[2].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) + (GRID_WIDTH / 2) - RADIUS - (HEX_WIDTH / 2) + 3 * OUTLINE,
+	m_grid_frame[2].setPosition(sf::Vector2f((WINDOW_WIDTH / 2) + (GRID_WIDTH / 2) - RADIUS - (HEX_WIDTH / 2) + 3 * OUTLINE + RADIUS,
 		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS + 2 * OUTLINE));
 	//lrft
 	m_grid_frame[3].setSize(sf::Vector2f(2 * RADIUS, GRID_HEGHT + RADIUS - 4 * OUTLINE));
@@ -109,7 +105,7 @@ void Board::createGridFrame()
 		(WINDOW_HEIGHT / 2) - (GRID_HEGHT / 2) - 2 * RADIUS + 2*OUTLINE));
 }
 
-sf::RectangleShape Board::createRectangle(const int index) const
+const sf::RectangleShape Board::createRectangle(const int index) const
 {
 	sf::RectangleShape rec;
 
@@ -124,7 +120,7 @@ sf::RectangleShape Board::createRectangle(const int index) const
 	return rec;
 }
 
-Colors Board::color2Enum(sf::Color color)
+const Colors Board::color2Enum(const sf::Color color)
 {
 	if (color == sf::Color::Cyan)
 		return Cyan;
@@ -163,23 +159,23 @@ void Board::drawBoard(sf::RenderWindow& window)
 
 }
 
-void Board::setPlayerX(Colors color)
+void Board::setPlayerX(const Colors color)
 {
 	m_PlayerX = std::make_unique<X>(m_rectangles[color].getPosition());
 }
 
-void Board::setComputerX(Colors color)
+void Board::setComputerX(const Colors color)
 {
 	m_ComputerX = std::make_unique<X>(m_rectangles[color].getPosition());
 
 }
 
-sf::RectangleShape Board::getRectangle(Colors color)
+const sf::RectangleShape Board::getRectangle(Colors const color) const
 {
 	return m_rectangles[color];
 }
 
-sf::Sprite Board::getBackButton()
+const sf::Sprite Board::getBackButton()const
 {
 	return m_back;
 }
@@ -195,17 +191,17 @@ void Board::backRelease()
 }
 
 
-Colors Board::getComputerColor()
+const Colors Board::getComputerColor() 
 {
 	return color2Enum(m_hexagons[COMPUTER_INDEX].getColor());
 }
 
-Colors Board::getPlayerColor()
+const Colors Board::getPlayerColor() 
 {
 	return color2Enum(m_hexagons[PLAYER_INDEX].getColor());
 }
 
-void Board::playTurn(bool player_turn, Colors color)
+void Board::playTurn(const bool player_turn, const Colors color)
 {
 	std::vector<bool> index_to_paint;
 	if (player_turn)
@@ -232,26 +228,26 @@ void Board::init()
 	m_PlayerX = std::make_unique<X>(m_rectangles[color2Enum(m_hexagons[PLAYER_INDEX].getColor())].getPosition());
 }
 
-int Board::size()
+const int Board::size()const
 {
 	return m_hexagons.size();
 }
 
-int Board::playerArea()
+const int Board::playerArea()
 {
 	std::vector<bool> currTree = m_graph.BFS(PLAYER_INDEX, m_hexagons[PLAYER_INDEX].getColor());
 	int counter = countArea(currTree);
 	return counter;
 }
 
-int Board::computerArea()
+const int Board::computerArea()
 {
 	std::vector<bool> currTree = m_graph.BFS(COMPUTER_INDEX, m_hexagons[COMPUTER_INDEX].getColor());
 	int counter = countArea(currTree);
 	return counter;
 }
 
-int Board::countArea(std::vector<bool> vec)
+const int Board::countArea(std::vector<bool> vec)const
 {
 	int counter = 0;
 	for (int index = 0; index < vec.size(); index++)
@@ -264,12 +260,22 @@ int Board::countArea(std::vector<bool> vec)
 	return counter;
 }
 
-Graph<Hexagon> Board::getGraph()
+const Graph<Hexagon> Board::getGraph()const
 {
 	return m_graph;
 }
 
-std::vector<Hexagon> Board::getBoard()
+const std::vector<Hexagon> Board::getBoard()const
 {
 	return m_hexagons;
+}
+
+void Board::rectanglePress(Colors color)
+{
+	m_rectangles[color].setOutlineColor(sf::Color::Red);
+}
+
+void Board::rectangleRelease(Colors color)
+{
+	m_rectangles[color].setOutlineColor(sf::Color::White);
 }

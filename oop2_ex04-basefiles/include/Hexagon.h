@@ -7,14 +7,14 @@
 class Hexagon
 {
 public:
-	Hexagon(int, int);
+	Hexagon(const int, const int);
 	sf::CircleShape& get();
-	int getRow();
-	int getCol();
-	sf::Color getColor();
-	sf::Vector2f getPosition();
-	int getIndex();
-	void setColor(Colors);
+	const int getRow()const;
+	const int getCol()const;
+	const sf::Color getColor()const;
+	const sf::Vector2f getPosition()const;
+	const int getIndex()const;
+	void setColor(const Colors);
 
 
 private:

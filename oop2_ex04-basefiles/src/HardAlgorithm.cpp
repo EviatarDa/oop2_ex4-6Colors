@@ -2,7 +2,7 @@
 
 #include "HardAlgorithm.h"
 
-Colors HardAlgorithm::getNextColor(Graph<Hexagon> graph, std::vector<Hexagon> board, int curr_size)
+Colors HardAlgorithm::getNextColor( Graph<Hexagon> graph,  std::vector<Hexagon> board, const int curr_size)
 {
     int sum = 0;
     Colors best_color;

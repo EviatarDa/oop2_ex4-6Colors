@@ -13,22 +13,22 @@ Resources& Resources::instance()
 	return Resource;
 }
 
-sf::Color* Resources::getColorArray()
+const sf::Color* Resources::getColorArray()const
 {
 	return m_colorArray;
 }
 
-sf::Texture& Resources::getTexture(Textures texture)
+const sf::Texture& Resources::getTexture(const Textures texture)const
 {
 	return m_textures[texture];
 }
 
-sf::Texture& Resources::getButton(Button button)
+const sf::Texture& Resources::getButton(const Button button)const
 {
 	return m_Buttons[button];
 }
 
-sf::Font& Resources::getFont()
+const sf::Font& Resources::getFont()const
 {
 	return m_font;
 }

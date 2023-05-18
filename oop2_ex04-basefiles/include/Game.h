@@ -31,10 +31,10 @@ private:
 	sf::Text m_score[2];
 
 	//functions
-	void playerTurn(sf::Vector2f);
-	void handleMenuClick(sf::Vector2f);
-	void handleMenuMouseMoved(sf::Vector2f);
-	void handleGameMouseMoved(sf::Vector2f);
+	void playerTurn(const sf::Vector2f);
+	void handleMenuClick(const sf::Vector2f);
+	void handleMenuMouseMoved(const sf::Vector2f);
+	void handleGameMouseMoved(const sf::Vector2f);
 	void startGame();
 	void init();
 	void computerTurn(Colors);
